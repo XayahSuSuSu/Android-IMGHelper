@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -80,46 +81,81 @@ class MainActivity : AppCompatActivity() {
                 main_imageView_envCheck.setImageResource(R.drawable.ic_cancel)
                 main_textView_envTitle.setText("环境未配置")
                 main_cardView_env.setCardBackgroundColor(Color.parseColor("#e72d2c"))
-            }
-            val builder = AlertDialog.Builder(this)
-                .setTitle("提示")
-                .setMessage("环境尚未配置，是否立刻配置环境？")
-                .setCancelable(true)
-                .setPositiveButton("立即配置") { _: DialogInterface?, which: Int ->
+                val builder = AlertDialog.Builder(this)
+                    .setTitle("提示")
+                    .setMessage("环境尚未配置，是否立刻配置环境？")
+                    .setCancelable(true)
+                    .setPositiveButton("立即配置") { _: DialogInterface?, which: Int ->
 
-                    val builder = AlertDialog.Builder(this)
-                        .setTitle("提示")
-                        .setMessage("请选择配置方式:")
-                        .setCancelable(true)
-                        .setPositiveButton("Magisk(推荐)") { _: DialogInterface?, which: Int ->
-                            Thread {
-                                fileUtil.moveFileToEnvDir("module.prop")
-                                fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/")
-                                fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/")
-                                fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/bin/")
-                                fileUtil.cpFiles(envPath + "module.prop", "/data/adb/modules/IMGHelperEnv/")
-                                fileUtil.cpFiles(toolsPath + "dtc", "/data/adb/modules/IMGHelperEnv/system/bin/")
-                                fileUtil.cpFiles(toolsPath + "mkbootimg", "/data/adb/modules/IMGHelperEnv/system/bin/")
-                                fileUtil.cpFiles(toolsPath + "mkdtimg", "/data/adb/modules/IMGHelperEnv/system/bin/")
-                                fileUtil.cpFiles(toolsPath + "unpack_bootimg", "/data/adb/modules/IMGHelperEnv/system/bin/")
-                                prepareForEnv()
-                            }.start()
-                        }
-                        .setNegativeButton("Root") { _: DialogInterface?, which: Int ->
-                            Thread {
-                                fileUtil.cpFiles(toolsPath + "dtc", "system/bin/")
-                                fileUtil.cpFiles(toolsPath + "mkbootimg", "system/bin/")
-                                fileUtil.cpFiles(toolsPath + "mkdtimg", "system/bin/")
-                                fileUtil.cpFiles(toolsPath + "unpack_bootimg", "system/bin/")
-                                prepareForEnv()
-                            }.start()
-                        }
-                        .create()
-                    builder.show()
-                    builder.getButton(AlertDialog.BUTTON_POSITIVE)
-                        .setTextColor(Color.parseColor("#f88e20"));
-                    builder.getButton(DialogInterface.BUTTON_NEGATIVE)
-                        .setTextColor(Color.RED);
+                        val builder = AlertDialog.Builder(this)
+                            .setTitle("提示")
+                            .setMessage("请选择配置方式:")
+                            .setCancelable(true)
+                            .setPositiveButton("Magisk(推荐)") { _: DialogInterface?, which: Int ->
+                                Thread {
+                                    fileUtil.moveFileToEnvDir("module.prop")
+                                    fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/")
+                                    fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/")
+                                    fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/bin/")
+                                    fileUtil.cpFiles(
+                                        envPath + "module.prop",
+                                        "/data/adb/modules/IMGHelperEnv/"
+                                    )
+                                    fileUtil.cpFiles(
+                                        toolsPath + "dtc",
+                                        "/data/adb/modules/IMGHelperEnv/system/bin/"
+                                    )
+                                    fileUtil.cpFiles(
+                                        toolsPath + "mkbootimg",
+                                        "/data/adb/modules/IMGHelperEnv/system/bin/"
+                                    )
+                                    fileUtil.cpFiles(
+                                        toolsPath + "mkdtimg",
+                                        "/data/adb/modules/IMGHelperEnv/system/bin/"
+                                    )
+                                    fileUtil.cpFiles(
+                                        toolsPath + "unpack_bootimg",
+                                        "/data/adb/modules/IMGHelperEnv/system/bin/"
+                                    )
+                                    runOnUiThread {
+                                        val builder = AlertDialog.Builder(this)
+                                            .setTitle("提示")
+                                            .setMessage("安装成功！是否立刻重启生效?")
+                                            .setCancelable(true)
+                                            .setPositiveButton("确定") { _: DialogInterface?, which: Int ->
+                                                CommandUtil.executeCommand(
+                                                    "reboot",
+                                                    "/system/bin/",
+                                                    true,
+                                                    true
+                                                )
+                                            }
+                                            .setNegativeButton("取消") { _: DialogInterface?, which: Int ->
+                                            }
+                                            .create()
+                                        builder.show()
+                                        builder.getButton(AlertDialog.BUTTON_POSITIVE)
+                                            .setTextColor(Color.parseColor("#f88e20"));
+                                        builder.getButton(DialogInterface.BUTTON_NEGATIVE)
+                                            .setTextColor(Color.RED)
+                                    }
+                                }.start()
+                            }
+                            .setNegativeButton("Root") { _: DialogInterface?, which: Int ->
+                                Thread {
+                                    fileUtil.cpFiles(toolsPath + "dtc", "system/bin/")
+                                    fileUtil.cpFiles(toolsPath + "mkbootimg", "system/bin/")
+                                    fileUtil.cpFiles(toolsPath + "mkdtimg", "system/bin/")
+                                    fileUtil.cpFiles(toolsPath + "unpack_bootimg", "system/bin/")
+                                    prepareForEnv()
+                                }.start()
+                            }
+                            .create()
+                        builder.show()
+                        builder.getButton(AlertDialog.BUTTON_POSITIVE)
+                            .setTextColor(Color.parseColor("#f88e20"));
+                        builder.getButton(DialogInterface.BUTTON_NEGATIVE)
+                            .setTextColor(Color.RED)
 
 //                    val mView: View = LayoutInflater.from(this)
 //                        .inflate(R.layout.alertdialog_loading, null, false)
@@ -131,13 +167,15 @@ class MainActivity : AppCompatActivity() {
 //                        .setCancelable(false)
 //                        .create()
 //                    builder.show()
-                }
-                .setNegativeButton("下次") { _: DialogInterface?, which: Int -> }
-                .create()
-            builder.show()
-            builder.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
-            builder.getButton(DialogInterface.BUTTON_NEGATIVE)
-                .setTextColor(Color.BLUE);
+                    }
+                    .setNegativeButton("下次") { _: DialogInterface?, which: Int -> }
+                    .create()
+                builder.show()
+                builder.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+                builder.getButton(DialogInterface.BUTTON_NEGATIVE)
+                    .setTextColor(Color.BLUE)
+            }
+
         }
     }
 
