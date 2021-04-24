@@ -53,8 +53,28 @@ class MainActivity : AppCompatActivity() {
         main_cardview_imgflash.setOnClickListener {
             val intent = Intent(this, IMGFlashActivity::class.java)
             startActivity(intent)
-
         }
+
+        val main_cardview_imgunpack: CardView = findViewById(R.id.main_cardview_imgunpack)
+        main_cardview_imgunpack.setOnClickListener {
+            dialogUtil.createCommonDialog("敬请期待！", {}, {})
+        }
+
+        val main_cardview_imgpack: CardView = findViewById(R.id.main_cardview_imgpack)
+        main_cardview_imgpack.setOnClickListener {
+            dialogUtil.createCommonDialog("敬请期待！", {}, {})
+        }
+
+        val main_cardview_stock: CardView = findViewById(R.id.main_cardview_stock)
+        main_cardview_stock.setOnClickListener {
+            dialogUtil.createCommonDialog("敬请期待！", {}, {})
+        }
+
+        val main_cardview_about: CardView = findViewById(R.id.main_cardview_about)
+        main_cardview_about.setOnClickListener {
+            dialogUtil.createCommonDialog("敬请期待！", {}, {})
+        }
+
 //        val button: Button = findViewById
 //        val unpackBootimg = Unpack_bootimg(toolsPath)
 //        unpackBootimg.unpack("/sdcard/Download/boot.img", "$workingPath/boot_out")
@@ -142,6 +162,7 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
     private fun prepareForTools() {
         val mDir = mutableListOf<String>()
         mDir.add(workingPath)
