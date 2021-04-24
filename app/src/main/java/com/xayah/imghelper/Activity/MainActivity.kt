@@ -15,11 +15,13 @@ import androidx.cardview.widget.CardView
 import com.xayah.imghelper.R
 import com.xayah.imghelper.Utils.CommandUtil
 import com.xayah.imghelper.Utils.CommandUtil.Companion.executeCommand
-import com.xayah.imghelper.Utils.FileUtil
 import com.xayah.imghelper.Utils.ContentUriUtil
+import com.xayah.imghelper.Utils.DialogUtil
+import com.xayah.imghelper.Utils.FileUtil
 import com.xayah.imghelper.Utils.Tools.Dtc
 import com.xayah.imghelper.Utils.Tools.Mkdtimg
 import com.xayah.imghelper.Utils.Tools.Unpack_bootimg
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var workingPath: String
     lateinit var outPath: String
     lateinit var fileUtil: FileUtil
+    val dialogUtil = DialogUtil(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,13 @@ class MainActivity : AppCompatActivity() {
         main_cardview_imgextract.setOnClickListener {
             val intent = Intent(this, IMGExtractActivity::class.java)
             startActivity(intent)
+        }
+
+        val main_cardview_imgflash: CardView = findViewById(R.id.main_cardview_imgflash)
+        main_cardview_imgflash.setOnClickListener {
+            val intent = Intent(this, IMGFlashActivity::class.java)
+            startActivity(intent)
+
         }
 //        val button: Button = findViewById
 //        val unpackBootimg = Unpack_bootimg(toolsPath)
@@ -76,154 +86,62 @@ class MainActivity : AppCompatActivity() {
                 main_imageView_envCheck.setImageResource(R.drawable.ic_cancel)
                 main_textView_envTitle.setText("环境未配置")
                 main_cardView_env.setCardBackgroundColor(Color.parseColor("#e72d2c"))
-                val builder = AlertDialog.Builder(this)
-                        .setTitle("提示")
-                        .setMessage("环境尚未配置，是否立刻配置环境？")
-                        .setCancelable(true)
-                        .setPositiveButton("立即配置") { _: DialogInterface?, which: Int ->
-
-                            val builder = AlertDialog.Builder(this)
-                                    .setTitle("提示")
-                                    .setMessage("请选择配置方式:")
-                                    .setCancelable(true)
-                                    .setPositiveButton("Magisk(推荐)") { _: DialogInterface?, which: Int ->
-                                        Thread {
-                                            fileUtil.moveFileToEnvDir("module.prop")
-                                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/")
-                                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/")
-                                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/bin/")
-                                            fileUtil.cpFiles(
-                                                    envPath + "module.prop",
-                                                    "/data/adb/modules/IMGHelperEnv/"
-                                            )
-                                            fileUtil.cpFiles(
-                                                    toolsPath + "dtc",
-                                                    "/data/adb/modules/IMGHelperEnv/system/bin/"
-                                            )
-                                            fileUtil.cpFiles(
-                                                    toolsPath + "mkbootimg",
-                                                    "/data/adb/modules/IMGHelperEnv/system/bin/"
-                                            )
-                                            fileUtil.cpFiles(
-                                                    toolsPath + "mkdtimg",
-                                                    "/data/adb/modules/IMGHelperEnv/system/bin/"
-                                            )
-                                            fileUtil.cpFiles(
-                                                    toolsPath + "unpack_bootimg",
-                                                    "/data/adb/modules/IMGHelperEnv/system/bin/"
-                                            )
-                                            runOnUiThread {
-                                                val builder = AlertDialog.Builder(this)
-                                                        .setTitle("提示")
-                                                        .setMessage("安装成功！是否立刻重启生效?")
-                                                        .setCancelable(true)
-                                                        .setPositiveButton("确定") { _: DialogInterface?, which: Int ->
-                                                            CommandUtil.executeCommand(
-                                                                    "reboot",
-                                                                    "/system/bin/",
-                                                                    true,
-                                                                    true
-                                                            )
-                                                        }
-                                                        .setNegativeButton("取消") { _: DialogInterface?, which: Int ->
-                                                        }
-                                                        .create()
-                                                builder.show()
-                                                builder.getButton(AlertDialog.BUTTON_POSITIVE)
-                                                        .setTextColor(Color.parseColor("#f88e20"));
-                                                builder.getButton(DialogInterface.BUTTON_NEGATIVE)
-                                                        .setTextColor(Color.RED)
-                                            }
-                                        }.start()
-                                    }
-                                    .setNegativeButton("Root") { _: DialogInterface?, which: Int ->
-                                        Thread {
-                                            fileUtil.cpFiles(toolsPath + "dtc", "system/bin/")
-                                            fileUtil.cpFiles(toolsPath + "mkbootimg", "system/bin/")
-                                            fileUtil.cpFiles(toolsPath + "mkdtimg", "system/bin/")
-                                            fileUtil.cpFiles(toolsPath + "unpack_bootimg", "system/bin/")
-                                            prepareForEnv()
-                                        }.start()
-                                    }
-                                    .create()
-                            builder.show()
-                            builder.getButton(AlertDialog.BUTTON_POSITIVE)
-                                    .setTextColor(Color.parseColor("#f88e20"));
-                            builder.getButton(DialogInterface.BUTTON_NEGATIVE)
-                                    .setTextColor(Color.RED)
-
-//                    val mView: View = LayoutInflater.from(this)
-//                        .inflate(R.layout.alertdialog_loading, null, false)
-//                    val alertdialog_progressBar: ProgressBar = mView.findViewById(R.id.alertdialog_progressBar)
-//                    val builder = AlertDialog.Builder(this)
-//                        .setView(mView)
-//                        .setTitle("提示")
-//                        .setMessage("正在安装...")
-//                        .setCancelable(false)
-//                        .create()
-//                    builder.show()
-                        }
-                        .setNegativeButton("下次") { _: DialogInterface?, which: Int -> }
-                        .create()
-                builder.show()
-                builder.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
-                builder.getButton(DialogInterface.BUTTON_NEGATIVE)
-                        .setTextColor(Color.BLUE)
-            }
-
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                val uri: Uri? = data?.data
-                if (uri != null) {
-                    Log.d("MainActivity", "文件路径：" + ContentUriUtil.getPath(this, uri))
-                    val unpackBootimg = Unpack_bootimg(toolsPath)
-                    unpackBootimg.unpack(
-                            ContentUriUtil.getPath(this, uri)!!,
-                            "$workingPath/working/unpack_bootimg/out"
-                    )
-                }
-            }
-            if (requestCode == 2) {
-                val uri: Uri? = data?.data
-                if (uri != null) {
-                    Log.d("MainActivity", "文件路径：" + ContentUriUtil.getPath(this, uri))
-                    val mkdtimg = Mkdtimg(toolsPath)
-                    mkdtimg.dump(
-                            ContentUriUtil.getPath(this, uri)!!,
-                            "$workingPath/working/mkdtimg/dtb/dtb"
-                    )
-                    val dtb = executeCommand(
-                            "find dtb.*",
-                            "$workingPath/working/mkdtimg/dtb/",
-                            true,
-                            true
-                    )
-//                    val dtc = Dtc(toolsPath)
-//                    dtc.dtb2Dts(
-//                        "$workingPath/working/mkdtimg/dtb/dtb.2",
-//                        "$workingPath/working/mkdtimg/dts/dts.2")
-                    for (eachOne in dtb.split("\n")) {
-                        if (eachOne != "") {
-                            Log.d("MainActivity", eachOne + "\n")
-                            val index = eachOne.split(".")
-                            val dtc = Dtc(toolsPath)
-                            dtc.dtb2Dts(
-                                    "$workingPath/working/mkdtimg/dtb/$eachOne",
-                                    "dts.${index[1]}",
-                                    "$workingPath/working/mkdtimg/dts/dts.${index[1]}"
+                dialogUtil.createCommonDialog("环境尚未配置，是否立刻配置环境？", {
+                    dialogUtil.createCustomButtonDialog("请选择配置方式:", "Magisk(推荐)", "Root", {
+                        Thread {
+                            fileUtil.moveFileToEnvDir("module.prop")
+                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/")
+                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/")
+                            fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/bin/")
+                            fileUtil.cpFiles(
+                                envPath + "module.prop",
+                                "/data/adb/modules/IMGHelperEnv/"
                             )
-                        }
-                    }
-                }
+                            fileUtil.cpFiles(
+                                toolsPath + "dtc",
+                                "/data/adb/modules/IMGHelperEnv/system/bin/"
+                            )
+                            fileUtil.cpFiles(
+                                toolsPath + "mkbootimg",
+                                "/data/adb/modules/IMGHelperEnv/system/bin/"
+                            )
+                            fileUtil.cpFiles(
+                                toolsPath + "mkdtimg",
+                                "/data/adb/modules/IMGHelperEnv/system/bin/"
+                            )
+                            fileUtil.cpFiles(
+                                toolsPath + "unpack_bootimg",
+                                "/data/adb/modules/IMGHelperEnv/system/bin/"
+                            )
+                            runOnUiThread {
+                                dialogUtil.createCommonDialog("安装成功！是否立刻重启生效?", {
+                                    CommandUtil.executeCommand(
+                                        "reboot",
+                                        "/system/bin/",
+                                        true,
+                                        true
+                                    )
+                                }, {
+                                })
+                            }
+                        }.start()
+                    }, {
+                        Thread {
+                            fileUtil.cpFiles(toolsPath + "dtc", "system/bin/")
+                            fileUtil.cpFiles(toolsPath + "mkbootimg", "system/bin/")
+                            fileUtil.cpFiles(toolsPath + "mkdtimg", "system/bin/")
+                            fileUtil.cpFiles(
+                                toolsPath + "unpack_bootimg",
+                                "system/bin/"
+                            )
+                            prepareForEnv()
+                        }.start()
+                    })
+                }, {})
             }
+
         }
     }
-
     private fun prepareForTools() {
         val mDir = mutableListOf<String>()
         mDir.add(workingPath)
