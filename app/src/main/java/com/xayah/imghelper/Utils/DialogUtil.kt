@@ -61,8 +61,8 @@ class DialogUtil(var mContext: Context) {
             .setTitle("提示")
             .setMessage(message)
             .setCancelable(true)
-            .setPositiveButton(positiveText) { _: DialogInterface?, which: Int -> positiveEvent }
-            .setNegativeButton(negativeText) { _: DialogInterface?, which: Int -> negativeEvent }
+            .setPositiveButton(positiveText) { _: DialogInterface?, which: Int -> positiveEvent() }
+            .setNegativeButton(negativeText) { _: DialogInterface?, which: Int -> negativeEvent() }
             .create()
         builder.window
             ?.setBackgroundDrawableResource(R.drawable.drawable_round_edge)
