@@ -39,6 +39,20 @@ class FileUtil(var context: Context) {
         }
     }
 
+    fun mkDirArr(path: MutableList<String>) {
+        var index = 0
+        for (i in path) {
+            path.set(index, "mkdir $i")
+            index++
+        }
+        CommandArrayUtil.executeCommand(
+                path,
+                "/system/bin/",
+                true,
+                true
+        )
+    }
+
     fun mvFiles(pathBefore: String, pathAfter: String) {
         CommandUtil.executeCommand(
             "mv $pathBefore $pathAfter",
