@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/imgextract_appbar"
+        android:id="@+id/imgflash_appbar"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,7 +31,7 @@
                     android:layout_height="60dp">
 
                     <ImageView
-                        android:id="@+id/imgextract_imageView_back"
+                        android:id="@+id/imgflash_imageView_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -45,11 +45,11 @@
                     android:layout_height="60dp">
 
                     <TextView
-                        android:id="@+id/imgextract_textView_title"
+                        android:id="@+id/imgflash_textView_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
-                        android:text="镜像提取"
+                        android:text="镜像刷入"
                         android:textColor="@color/black"
                         android:textSize="32sp"
                         android:textStyle="bold" />
@@ -68,10 +68,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".Activity.IMGExtractActivity">
+            tools:context=".Activity.IMGFlashActivity">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/imgextract_cardView_boot"
+                android:id="@+id/imgflash_cardView_boot"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -81,7 +81,7 @@
                 app:cardBackgroundColor="@color/mGrayBackground"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="0dp"
-                app:layout_constraintBottom_toTopOf="@id/imgextract_cardView_recovery"
+                app:layout_constraintBottom_toTopOf="@id/imgflash_cardView_recovery"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -93,7 +93,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/imgextract_textView_boot"
+                        android:id="@+id/imgflash_textView_boot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -110,7 +110,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/imgextract_imageView_boot"
+                            android:id="@+id/imgflash_imageView_boot"
                             android:layout_width="wrap_content"
                             android:layout_height="64dp"
                             android:layout_centerInParent="true"
@@ -122,7 +122,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/imgextract_cardView_recovery"
+                android:id="@+id/imgflash_cardView_recovery"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -132,10 +132,10 @@
                 app:cardBackgroundColor="@color/mGrayBackground"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="0dp"
-                app:layout_constraintBottom_toTopOf="@id/imgextract_cardView_dtbo"
+                app:layout_constraintBottom_toTopOf="@id/imgflash_cardView_dtbo"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgextract_cardView_boot">
+                app:layout_constraintTop_toBottomOf="@id/imgflash_cardView_boot">
 
 
                 <LinearLayout
@@ -144,7 +144,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/imgextract_textView_recovery"
+                        android:id="@+id/imgflash_textView_recovery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -161,7 +161,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/imgextract_imageView_recovery"
+                            android:id="@+id/imgflash_imageView_recovery"
                             android:layout_width="wrap_content"
                             android:layout_height="64dp"
                             android:layout_centerInParent="true"
@@ -173,7 +173,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/imgextract_cardView_dtbo"
+                android:id="@+id/imgflash_cardView_dtbo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -186,7 +186,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgextract_cardView_recovery">
+                app:layout_constraintTop_toBottomOf="@id/imgflash_cardView_recovery">
 
 
                 <LinearLayout
@@ -195,7 +195,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/imgextract_textView_dtbo"
+                        android:id="@+id/imgflash_textView_dtbo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -212,7 +212,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/imgextract_imageView_dtbo"
+                            android:id="@+id/imgflash_imageView_dtbo"
                             android:layout_width="wrap_content"
                             android:layout_height="64dp"
                             android:layout_centerInParent="true"
