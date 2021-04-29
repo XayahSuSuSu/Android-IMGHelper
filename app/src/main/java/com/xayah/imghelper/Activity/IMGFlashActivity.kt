@@ -2,19 +2,14 @@ package com.xayah.imghelper.Activity
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.xayah.imghelper.R
-import com.xayah.imghelper.Utils.CommandUtil
 import com.xayah.imghelper.Utils.ContentUriUtil
 import com.xayah.imghelper.Utils.DialogUtil
-import com.xayah.imghelper.Utils.Tools.Dtc
-import com.xayah.imghelper.Utils.Tools.IMGExtract
 import com.xayah.imghelper.Utils.Tools.IMGFlash
-import com.xayah.imghelper.Utils.Tools.Mkdtimg
 
 class IMGFlashActivity : AppCompatActivity() {
     val dialogUtil = DialogUtil(this)

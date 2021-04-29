@@ -46,10 +46,10 @@ class FileUtil(var context: Context) {
             index++
         }
         CommandArrayUtil.executeCommand(
-                path,
-                "/system/bin/",
-                true,
-                true
+            path,
+            "/system/bin/",
+            true,
+            true
         )
     }
 
