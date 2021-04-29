@@ -33,7 +33,7 @@ class CommandArrayUtil {
                     return "Permission denied"
                 }
                 os.writeBytes("cd $path\n");
-                for (i in commandArr){
+                for (i in commandArr) {
                     os.writeBytes("$i\n");
                     os.flush()
                     Log.d("mCommand", "输入指令 : $i")

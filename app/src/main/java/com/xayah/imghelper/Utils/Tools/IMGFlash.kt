@@ -4,7 +4,7 @@ import android.util.Log
 import com.xayah.imghelper.Utils.CommandUtil
 
 class IMGFlash() {
-    companion object{
+    companion object {
         fun boot(imgPath: String) {
             val IMGPartitionPath = CommandUtil.executeCommand(
                 "ls -l boot",
@@ -42,6 +42,7 @@ class IMGFlash() {
                 true
             )
         }
+
         fun dtbo(imgPath: String) {
             val IMGPartitionPath = CommandUtil.executeCommand(
                 "ls -l dtbo",
