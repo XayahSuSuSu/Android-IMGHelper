@@ -15,9 +15,9 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/main_appbar"
-            android:background="#fff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#fff">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -67,10 +67,12 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackgroundBorderless"
                         app:cardBackgroundColor="#03d568"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="0dp"
-                        >
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -89,24 +91,24 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="20dp"
-                                android:gravity="center_vertical"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
                                 android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/main_textView_envTitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="20dp"
                                     android:text="环境已配置"
-                                    android:textColor="#fff" />
+                                    android:textColor="#fff"
+                                    android:textSize="20dp" />
 
                                 <TextView
                                     android:id="@+id/main_textView_envVersion"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="v1.0.0"
-                                    android:textColor="#fff"/>
+                                    android:text="AARCH64"
+                                    android:textColor="#fff" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -241,6 +243,109 @@
                     app:layout_constraintTop_toBottomOf="@id/main_constraintLayout_one">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/main_cardview_dtboPatch"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/mGrayBackground"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="0dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/main_cardview_magiskPatch"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/main_textView_dtboPatch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:text="DTBO修补"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/main_imageView_dtboPatch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="15dp"
+                                app:srcCompat="@drawable/ic_patch" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_cardview_magiskPatch"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/mGrayBackground"
+                        app:cardCornerRadius="30dp"
+                        app:cardElevation="0dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/main_cardview_dtboPatch"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/main_textView_magiskPatch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:text="Magisk修补"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/main_imageView_magiskPatch"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="15dp"
+                                app:srcCompat="@drawable/ic_magisk_with_bkg" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/main_constraintLayout_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/main_constraintLayout_two">
+
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/main_cardview_imgunpack"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
@@ -336,12 +441,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/main_constraintLayout_three"
+                    android:id="@+id/main_constraintLayout_four"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_constraintLayout_two">
+                    app:layout_constraintTop_toBottomOf="@id/main_constraintLayout_three">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/main_cardview_stock"
