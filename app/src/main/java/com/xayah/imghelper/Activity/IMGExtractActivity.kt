@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.xayah.imghelper.R
 import com.xayah.imghelper.Utils.DialogUtil
-import com.xayah.imghelper.Utils.Tools.IMGExtract
+import com.xayah.imghelper.Tools.IMGExtract
 
 class IMGExtractActivity : AppCompatActivity() {
     lateinit var cachePath: String

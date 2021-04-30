@@ -1,4 +1,4 @@
-package com.xayah.imghelper.Utils.Tools
+package com.xayah.imghelper.Tools
 
 import com.xayah.imghelper.Utils.CommandUtil
 
