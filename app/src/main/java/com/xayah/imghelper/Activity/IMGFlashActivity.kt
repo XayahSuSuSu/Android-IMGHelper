@@ -7,9 +7,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.xayah.imghelper.R
+import com.xayah.imghelper.Tools.IMGFlash
 import com.xayah.imghelper.Utils.ContentUriUtil
 import com.xayah.imghelper.Utils.DialogUtil
-import com.xayah.imghelper.Utils.Tools.IMGFlash
 
 class IMGFlashActivity : AppCompatActivity() {
     val dialogUtil = DialogUtil(this)
@@ -57,11 +57,19 @@ class IMGFlashActivity : AppCompatActivity() {
                 val uri: Uri? = data?.data
                 if (uri != null) {
                     val path = ContentUriUtil.getPath(this, uri)
-                    Log.d("MainActivity", "文件路径：" + path)
+                    Log.d("MainActivity", "文件路径：$path")
                     if (path != null) {
-                        IMGFlash.boot(path)
+                        Log.d(
+                            "MainActivity",
+                            "文件后缀：" + path.substring(path.length - 4, path.length)
+                        )
+                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                            IMGFlash.boot(path)
+                            dialogUtil.createCommonDialog("boot刷入成功!", {}, {})
+                        } else {
+                            dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
+                        }
                     }
-                    dialogUtil.createCommonDialog("Boot刷入成功!", {}, {})
                 }
             }
             if (requestCode == 2) {
@@ -70,8 +78,16 @@ class IMGFlashActivity : AppCompatActivity() {
                     val path = ContentUriUtil.getPath(this, uri)
                     Log.d("MainActivity", "文件路径：" + path)
                     if (path != null) {
-                        IMGFlash.recovery(path)
-                        dialogUtil.createCommonDialog("recovery刷入成功!", {}, {})
+                        Log.d(
+                            "MainActivity",
+                            "文件后缀：" + path.substring(path.length - 4, path.length)
+                        )
+                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                            IMGFlash.recovery(path)
+                            dialogUtil.createCommonDialog("recovery刷入成功!", {}, {})
+                        } else {
+                            dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
+                        }
                     }
                 }
             }
@@ -81,8 +97,16 @@ class IMGFlashActivity : AppCompatActivity() {
                     val path = ContentUriUtil.getPath(this, uri)
                     Log.d("MainActivity", "文件路径：" + path)
                     if (path != null) {
-                        IMGFlash.dtbo(path)
-                        dialogUtil.createCommonDialog("dtbo刷入成功!", {}, {})
+                        Log.d(
+                            "MainActivity",
+                            "文件后缀：" + path.substring(path.length - 4, path.length)
+                        )
+                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                            IMGFlash.dtbo(path)
+                            dialogUtil.createCommonDialog("dtbo刷入成功!", {}, {})
+                        } else {
+                            dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
+                        }
                     }
                 }
             }
