@@ -103,10 +103,9 @@ object ContentUriUtil {
                 val index: Int = cursor.getColumnIndexOrThrow(column)
                 return cursor.getString(index)
             }
-        }catch (e:RuntimeException){
+        } catch (e: RuntimeException) {
             e.printStackTrace()
-        }
-        finally {
+        } finally {
             if (cursor != null) cursor.close()
         }
         return null
