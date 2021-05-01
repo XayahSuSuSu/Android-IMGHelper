@@ -15,7 +15,7 @@ class IMGFlashActivity : AppCompatActivity() {
     val dialogUtil = DialogUtil(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_imgflash)
+        setContentView(R.layout.activity_img_flash)
 
         val imgflash_cardView_boot: CardView = findViewById(R.id.imgflash_cardView_boot)
         imgflash_cardView_boot.setOnClickListener {

@@ -27,6 +27,11 @@ class FileUtil(var context: Context) {
         return file.exists()
     }
 
+    fun ifFileExist(fileName: String,dirName: String): Boolean {
+        val file = File(context.filesDir.toString() + "/$dirName/" + fileName)
+        return file.exists()
+    }
+
     fun mkDir(path: String) {
         val file = File(path)
         if (!file.exists()) {
@@ -114,6 +119,27 @@ class FileUtil(var context: Context) {
             inputStream.close()
             outStream.close()
             Log.d("TAG", "moveFileToEnvDir: ")
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun moveFileToCertainDir(fileName: String,dirName:String,assetsDirName:String) {
+        try {
+            checkToolsDirExist(dirName)
+            val file = File(context.filesDir.toString() + "/$dirName/", fileName)
+            val outStream = FileOutputStream(file)
+            val inputStream = context.resources.assets.open("$assetsDirName/$fileName")
+            val buffer = ByteArray(1024)
+            var byteCount: Int
+            while (inputStream.read(buffer).also { byteCount = it } != -1) { // 循环从输入流读取
+                // buffer字节
+                outStream.write(buffer, 0, byteCount) // 将读取的输入流写入到输出流
+            }
+            outStream.flush() // 刷新缓冲区
+            inputStream.close()
+            outStream.close()
+            Log.d("TAG", "moveFileToCertainDir: ")
         } catch (e: IOException) {
             e.printStackTrace()
         }
