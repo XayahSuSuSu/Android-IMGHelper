@@ -6,6 +6,7 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
 import androidx.core.widget.NestedScrollView
 
@@ -79,7 +80,8 @@ class MyScrollView : NestedScrollView {
             0F, 0F, inner!!.top.toFloat(),
             normal.top.toFloat()
         )
-        translateAnimation.duration = 200
+        translateAnimation.duration = 300
+        translateAnimation.interpolator = DecelerateInterpolator(1f)
         inner!!.startAnimation(translateAnimation)
         inner!!.layout(normal.left, normal.top, normal.right, normal.bottom)
         normal.setEmpty()
@@ -99,6 +101,6 @@ class MyScrollView : NestedScrollView {
     }
 
     companion object {
-        private const val size = 4
+        private const val size = 2
     }
 }
