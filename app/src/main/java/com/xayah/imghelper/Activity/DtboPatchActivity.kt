@@ -72,8 +72,8 @@ class DtboPatchActivity : AppCompatActivity() {
                         Shell.su("cp $mDtboPath $mShellDirPath/dtbo.img").exec()
                         val result = Shell.su("./Patch.sh").exec().out
                         Log.d("DtboPatchActivity", result.toString())
-                        it.dismiss()
                         Shell.su("cp dtbo_new.img $mDtboDirPath/dtbo_new.img").exec()
+                        it.dismiss()
                         runOnUiThread {
                             dialogUtil.createPositiveButtonDialog(
                                 "修补成功!\n存放于:\n$mDtboDirPath/dtbo_new.img",
