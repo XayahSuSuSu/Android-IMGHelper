@@ -12,42 +12,46 @@ import com.xayah.imghelper.Utils.ContentUriUtil
 import com.xayah.imghelper.Utils.DialogUtil
 
 class IMGFlashActivity : AppCompatActivity() {
+    // -------------------Component-------------------
+    lateinit var imgflash_cardView_boot: CardView
+    lateinit var imgflash_cardView_recovery: CardView
+    lateinit var imgflash_cardView_dtbo: CardView
+
+    // -------------------Utils-------------------
     val dialogUtil = DialogUtil(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_img_flash)
+        bindView() // 绑定组件
+        setListener() // 设置监听器
+    }
 
-        val imgflash_cardView_boot: CardView = findViewById(R.id.imgflash_cardView_boot)
+    private fun setListener() {
         imgflash_cardView_boot.setOnClickListener {
-            dialogUtil.createCommonDialog("选择文件时，请勿在快捷选择中选择文件！", {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "*/*" //无类型限制
-                intent.addCategory(Intent.CATEGORY_OPENABLE)
-                startActivityForResult(intent, 1)
-            }, {})
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*" //无类型限制
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(intent, 1)
         }
-
-        val imgflash_cardView_recovery: CardView = findViewById(R.id.imgflash_cardView_recovery)
         imgflash_cardView_recovery.setOnClickListener {
-            dialogUtil.createCommonDialog("选择文件时，请勿在快捷选择中选择文件！", {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "*/*" //无类型限制
-                intent.addCategory(Intent.CATEGORY_OPENABLE)
-                startActivityForResult(intent, 2)
-            }, {})
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*" //无类型限制
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(intent, 2)
         }
-
-        val imgflash_cardView_dtbo: CardView = findViewById(R.id.imgflash_cardView_dtbo)
         imgflash_cardView_dtbo.setOnClickListener {
-            dialogUtil.createCommonDialog("选择文件时，请勿在快捷选择中选择文件！", {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "*/*" //无类型限制
-                intent.addCategory(Intent.CATEGORY_OPENABLE)
-                startActivityForResult(intent, 3)
-            }, {})
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*" //无类型限制
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(intent, 3)
         }
+    }
 
-
+    private fun bindView() {
+        imgflash_cardView_boot = findViewById(R.id.imgflash_cardView_boot)
+        imgflash_cardView_recovery = findViewById(R.id.imgflash_cardView_recovery)
+        imgflash_cardView_dtbo = findViewById(R.id.imgflash_cardView_dtbo)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -69,6 +73,8 @@ class IMGFlashActivity : AppCompatActivity() {
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
+                    } else {
+                        dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
                     }
                 }
             }
@@ -88,6 +94,8 @@ class IMGFlashActivity : AppCompatActivity() {
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
+                    } else {
+                        dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
                     }
                 }
             }
@@ -108,6 +116,8 @@ class IMGFlashActivity : AppCompatActivity() {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
                     }
+                } else {
+                    dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
                 }
             }
         }
