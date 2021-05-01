@@ -68,7 +68,7 @@ class FileUtil(private val context: Context) {
 
     }
 
-    fun cpFiles(pathBefore: String, pathAfter: String,isRoot: Boolean) {
+    fun cpFiles(pathBefore: String, pathAfter: String, isRoot: Boolean) {
         if (isRoot) {
             Shell.su("cp $pathBefore $pathAfter").exec()
             chmod(pathAfter, true)
@@ -106,7 +106,6 @@ class FileUtil(private val context: Context) {
             e.printStackTrace()
         }
     }
-
 
 
     fun moveFileToCertainDir(fileName: String, dirName: String, assetsDirName: String) {
