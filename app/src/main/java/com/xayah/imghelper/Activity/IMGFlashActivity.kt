@@ -60,14 +60,15 @@ class IMGFlashActivity : AppCompatActivity() {
             if (requestCode == 1) {
                 val uri: Uri? = data?.data
                 if (uri != null) {
-                    val path = ContentUriUtil.getPath(this, uri)
-                    Log.d("MainActivity", "文件路径：$path")
-                    if (path != null) {
+                    val path: String
+                    try {
+                        path = ContentUriUtil.getPath(this, uri).toString()
+                        Log.d("MainActivity", "文件路径：$path")
                         Log.d(
                             "MainActivity",
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
-                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                        if (path.substring(path.length - 4, path.length) == ".img") {
                             dialogUtil.createProgressDialog {
                                 Thread {
                                     IMGFlash.boot(path)
@@ -82,22 +83,24 @@ class IMGFlashActivity : AppCompatActivity() {
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
-                    } else {
-                        dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
+                    } catch (e: RuntimeException) {
+                        e.printStackTrace()
+                        dialogUtil.createPositiveButtonDialog("请勿在快捷选择中选择文件！", "好的", {})
                     }
                 }
             }
             if (requestCode == 2) {
                 val uri: Uri? = data?.data
                 if (uri != null) {
-                    val path = ContentUriUtil.getPath(this, uri)
-                    Log.d("MainActivity", "文件路径：" + path)
-                    if (path != null) {
+                    val path: String
+                    try {
+                        path = ContentUriUtil.getPath(this, uri).toString()
+                        Log.d("MainActivity", "文件路径：$path")
                         Log.d(
                             "MainActivity",
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
-                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                        if (path.substring(path.length - 4, path.length) == ".img") {
                             dialogUtil.createProgressDialog {
                                 Thread {
                                     IMGFlash.recovery(path)
@@ -112,26 +115,27 @@ class IMGFlashActivity : AppCompatActivity() {
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
-                    } else {
-                        dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
+                    } catch (e: RuntimeException) {
+                        e.printStackTrace()
+                        dialogUtil.createPositiveButtonDialog("请勿在快捷选择中选择文件！", "好的", {})
                     }
                 }
             }
             if (requestCode == 3) {
                 val uri: Uri? = data?.data
                 if (uri != null) {
-                    val path = ContentUriUtil.getPath(this, uri)
-                    Log.d("MainActivity", "文件路径：" + path)
-                    if (path != null) {
+                    val path: String
+                    try {
+                        path = ContentUriUtil.getPath(this, uri).toString()
+                        Log.d("MainActivity", "文件路径：$path")
                         Log.d(
                             "MainActivity",
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
-                        if (path.substring(path.length - 4, path.length - 1) == ".img") {
+                        if (path.substring(path.length - 4, path.length) == ".img") {
                             dialogUtil.createProgressDialog {
                                 Thread {
                                     IMGFlash.dtbo(path)
-
                                     it.dismiss()
                                     runOnUiThread {
                                         dialogUtil.createPositiveButtonDialog(
@@ -143,9 +147,10 @@ class IMGFlashActivity : AppCompatActivity() {
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
+                    } catch (e: RuntimeException) {
+                        e.printStackTrace()
+                        dialogUtil.createPositiveButtonDialog("请勿在快捷选择中选择文件！", "好的", {})
                     }
-                } else {
-                    dialogUtil.createPositiveButtonDialog("选择文件时，请勿在快捷选择中选择文件！", "好的", {})
                 }
             }
         }
