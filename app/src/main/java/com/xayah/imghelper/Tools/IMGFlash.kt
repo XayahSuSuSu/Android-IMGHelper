@@ -1,65 +1,35 @@
 package com.xayah.imghelper.Tools
 
 import android.util.Log
-import com.xayah.imghelper.Utils.CommandUtil
+import com.topjohnwu.superuser.Shell
 
 class IMGFlash() {
     companion object {
         fun boot(imgPath: String) {
-            val IMGPartitionPath = CommandUtil.executeCommand(
-                "ls -l boot",
-                "/dev/block/by-name",
-                true,
-                true
-            )
-            Log.d("IMGExtractActivity", IMGPartitionPath)
+            val IMGPartitionPath = Shell.su("ls -l /dev/block/by-name/boot").exec().out[0]
+            Log.d("IMGFlash", IMGPartitionPath)
             val link = IMGPartitionPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
-            CommandUtil.executeCommand(
-                "dd if=$imgPath of=$IMGlink",
-                "/dev/block/by-name",
-                true,
-                true
-            )
+            Log.d("IMGFlash", IMGlink)
+            Shell.su("dd if=$imgPath of=$IMGlink").exec()
         }
 
         fun recovery(imgPath: String) {
-            val IMGPartitionPath = CommandUtil.executeCommand(
-                "ls -l recovery",
-                "/dev/block/by-name",
-                true,
-                true
-            )
-            Log.d("IMGExtractActivity", IMGPartitionPath)
+            val IMGPartitionPath = Shell.su("ls -l /dev/block/by-name/recovery").exec().out[0]
+            Log.d("IMGFlash", IMGPartitionPath)
             val link = IMGPartitionPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
-            CommandUtil.executeCommand(
-                "dd if=$imgPath of=$IMGlink",
-                "/dev/block/by-name",
-                true,
-                true
-            )
+            Log.d("IMGFlash", IMGlink)
+            Shell.su("dd if=$imgPath of=$IMGlink").exec()
         }
 
         fun dtbo(imgPath: String) {
-            val IMGPartitionPath = CommandUtil.executeCommand(
-                "ls -l dtbo",
-                "/dev/block/by-name",
-                true,
-                true
-            )
-            Log.d("IMGExtractActivity", IMGPartitionPath)
+            val IMGPartitionPath = Shell.su("ls -l /dev/block/by-name/dtbo").exec().out[0]
+            Log.d("IMGFlash", IMGPartitionPath)
             val link = IMGPartitionPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
-            CommandUtil.executeCommand(
-                "dd if=$imgPath of=$IMGlink",
-                "/dev/block/by-name",
-                true,
-                true
-            )
+            Log.d("IMGFlash", IMGlink)
+            Shell.su("dd if=$imgPath of=$IMGlink").exec()
         }
     }
 }

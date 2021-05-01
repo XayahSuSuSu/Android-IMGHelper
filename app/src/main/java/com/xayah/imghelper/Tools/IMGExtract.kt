@@ -7,28 +7,28 @@ class IMGExtract() {
     companion object {
         fun boot(outPutPath: String) {
             val IMGPath = Shell.su("ls -l /dev/block/by-name/boot").exec().out[0]
-            Log.d("IMGExtractActivity", IMGPath)
+            Log.d("IMGExtract", IMGPath)
             val link = IMGPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
+            Log.d("IMGExtract", IMGlink)
             Shell.su("dd if=$IMGlink of=$outPutPath/boot.img").exec()
         }
 
         fun recovery(outPutPath: String) {
             val IMGPath = Shell.su("ls -l /dev/block/by-name/recovery").exec().out[0]
-            Log.d("IMGExtractActivity", IMGPath)
+            Log.d("IMGExtract", IMGPath)
             val link = IMGPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
+            Log.d("IMGExtract", IMGlink)
             Shell.su("dd if=$IMGlink of=$outPutPath/recovery.img").exec()
         }
 
         fun dtbo(outPutPath: String) {
             val IMGPath = Shell.su("ls -l /dev/block/by-name/dtbo").exec().out[0]
-            Log.d("IMGExtractActivity", IMGPath)
+            Log.d("IMGExtract", IMGPath)
             val link = IMGPath.split("->")
             val IMGlink = link[1].trim()
-            Log.d("IMGExtractActivity", IMGlink)
+            Log.d("IMGExtract", IMGlink)
             Shell.su("dd if=$IMGlink of=$outPutPath/dtbo.img").exec()
         }
     }
