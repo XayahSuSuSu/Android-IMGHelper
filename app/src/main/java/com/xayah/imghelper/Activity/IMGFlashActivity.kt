@@ -68,8 +68,17 @@ class IMGFlashActivity : AppCompatActivity() {
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
                         if (path.substring(path.length - 4, path.length - 1) == ".img") {
-                            IMGFlash.boot(path)
-                            dialogUtil.createCommonDialog("boot刷入成功!", {}, {})
+                            dialogUtil.createProgressDialog {
+                                Thread {
+                                    IMGFlash.boot(path)
+                                    it.dismiss()
+                                    runOnUiThread {
+                                        dialogUtil.createPositiveButtonDialog(
+                                            "boot刷入成功!",
+                                            "好的", {})
+                                    }
+                                }.start()
+                            }
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
@@ -89,8 +98,17 @@ class IMGFlashActivity : AppCompatActivity() {
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
                         if (path.substring(path.length - 4, path.length - 1) == ".img") {
-                            IMGFlash.recovery(path)
-                            dialogUtil.createCommonDialog("recovery刷入成功!", {}, {})
+                            dialogUtil.createProgressDialog {
+                                Thread {
+                                    IMGFlash.recovery(path)
+                                    it.dismiss()
+                                    runOnUiThread {
+                                        dialogUtil.createPositiveButtonDialog(
+                                            "recovery刷入成功!",
+                                            "好的", {})
+                                    }
+                                }.start()
+                            }
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
@@ -110,8 +128,18 @@ class IMGFlashActivity : AppCompatActivity() {
                             "文件后缀：" + path.substring(path.length - 4, path.length)
                         )
                         if (path.substring(path.length - 4, path.length - 1) == ".img") {
-                            IMGFlash.dtbo(path)
-                            dialogUtil.createCommonDialog("dtbo刷入成功!", {}, {})
+                            dialogUtil.createProgressDialog {
+                                Thread {
+                                    IMGFlash.dtbo(path)
+
+                                    it.dismiss()
+                                    runOnUiThread {
+                                        dialogUtil.createPositiveButtonDialog(
+                                            "dtbo刷入成功!",
+                                            "好的", {})
+                                    }
+                                }.start()
+                            }
                         } else {
                             dialogUtil.createCommonDialog("请选择正确的IMG格式", {}, {})
                         }
