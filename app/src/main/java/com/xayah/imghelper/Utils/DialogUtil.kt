@@ -37,6 +37,7 @@ class DialogUtil(var mContext: Context) {
     }
 
     fun createProgressDialog(
+        positiveEvent: (AlertDialog) -> Unit,
     ) {
         val builder = AlertDialog.Builder(mContext)
             .setTitle("请稍后")
@@ -62,6 +63,8 @@ class DialogUtil(var mContext: Context) {
             builder.window!!.windowManager.getDefaultDisplay().getWidth() - 200
         }
         builder.window!!.attributes = params
+
+        positiveEvent(builder)
     }
 
     fun createCustomButtonDialog(
