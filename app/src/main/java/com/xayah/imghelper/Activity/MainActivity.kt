@@ -16,6 +16,9 @@ import com.xayah.imghelper.Utils.DialogUtil
 import com.xayah.imghelper.Utils.FileUtil
 
 
+
+
+
 class MainActivity : AppCompatActivity() {
     lateinit var toolsPath: String
     lateinit var envPath: String
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         fileUtil = FileUtil(this)
         prepareForTools()
         prepareForEnv()
+
+
 
         val main_cardview_imgextract: CardView = findViewById(R.id.main_cardview_imgextract)
         main_cardview_imgextract.setOnClickListener {
@@ -207,8 +212,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d("MainActivity", "unpack_bootimg已存在")
         }
-        if (!fileUtil.ifFileExist("Patch.sh","scripts")) {
-            fileUtil.moveFileToCertainDir("Patch.sh","scripts","Scripts")
+        if (!fileUtil.ifFileExist("Patch.sh", "scripts")) {
+            fileUtil.moveFileToCertainDir("Patch.sh", "scripts", "Scripts")
 //            executeCommand("chmod 777 Patch.sh", toolsPath, true, true)
             Log.d("MainActivity", "Patch.sh不存在，已转存")
         } else {

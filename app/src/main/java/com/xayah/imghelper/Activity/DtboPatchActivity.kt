@@ -8,8 +8,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.topjohnwu.superuser.Shell
 import com.xayah.imghelper.R
-import com.xayah.imghelper.Utils.CommandArrayUtil
 import com.xayah.imghelper.Utils.ContentUriUtil
 import com.xayah.imghelper.Utils.DialogUtil
 
@@ -50,24 +50,40 @@ class DtboPatchActivity : AppCompatActivity() {
                     "好的",
                     {})
             } else {
-                Thread{
-                    val mRate = textInputEditText_dtboRate.text.toString()
-                    val mDtboPatch = mutableListOf<String>()
-                    mDtboPatch.add("echo $mRate > Info.txt")
-                    val mShellPath = this.filesDir.toString() + "/scripts/Patch.sh"
-//                val mDtboDirPath = textInputEditText_dtboPath.text.toString().substring(0,textInputEditText_dtboPath.text.toString().lastIndexOf('/'))
-                    val mDtboPath = textInputEditText_dtboPath.text.toString()
-                    val mShellDirPath = mShellPath.substring(0, mShellPath.lastIndexOf('/'))
-                    mDtboPatch.add("cp $mDtboPath $mShellDirPath/dtbo.img")
-                    mDtboPatch.add("chmod 777 $mShellPath")
-                    mDtboPatch.add("./Patch.sh")
-                    CommandArrayUtil.executeCommand(
-                        mDtboPatch,
-                        mShellDirPath,
-                        true,
-                        true
-                    )
-                }.start()
+                val mRate = textInputEditText_dtboRate.text.toString()
+//                    val mDtboPatch = mutableListOf<String>()
+//                    mDtboPatch.add("echo $mRate > Info.txt")
+                val mShellPath = this.filesDir.toString() + "/scripts/Patch.sh"
+                val mDtboDirPath = textInputEditText_dtboPath.text.toString()
+                    .substring(0, textInputEditText_dtboPath.text.toString().lastIndexOf('/'))
+                val mDtboPath = textInputEditText_dtboPath.text.toString()
+                val mShellDirPath = mShellPath.substring(0, mShellPath.lastIndexOf('/'))
+//                    mDtboPatch.add("cp $mDtboPath $mShellDirPath/dtbo.img")
+//                    mDtboPatch.add("chmod 777 $mShellPath")
+//                    mDtboPatch.add("./Patch.sh")
+//                    CommandArrayUtil.executeCommand(
+//                        mDtboPatch,
+//                        mShellDirPath,
+//                        true,
+//                        true
+//                    )
+                dialogUtil.createProgressDialog {
+                    Thread {
+                        Shell.su("cd $mShellDirPath").exec()
+                        Shell.su("cp $mDtboPath $mShellDirPath/dtbo.img").exec()
+                        Shell.su("chmod 777 $mShellPath").exec()
+                        val result = Shell.su("./Patch.sh").exec().out
+                        Log.d("DtboPatchActivity", result.toString())
+                        it.dismiss()
+                        Shell.su("cp dtbo_new.img $mDtboDirPath/dtbo_new.img").exec()
+                        runOnUiThread {
+                            dialogUtil.createPositiveButtonDialog(
+                                "修补成功!\n存放于:\n$mDtboDirPath/dtbo_new.img",
+                                "好的",
+                                {})
+                        }
+                    }.start()
+                }
 
             }
 
