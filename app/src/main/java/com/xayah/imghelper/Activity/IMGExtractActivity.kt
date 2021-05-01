@@ -15,7 +15,7 @@ class IMGExtractActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_imgextract)
+        setContentView(R.layout.activity_img_extract)
         cachePath = applicationContext.filesDir.toString() + "/cache/"
         outPath = Environment.getExternalStorageDirectory().path + "/IMGHelper"
         val imgExtract = IMGExtract(cachePath)

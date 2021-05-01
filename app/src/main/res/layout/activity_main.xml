@@ -296,7 +296,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:cardBackgroundColor="@color/mGrayBackground"
+                        app:cardBackgroundColor="#00AF9C"
                         app:cardCornerRadius="30dp"
                         app:cardElevation="0dp"
 
@@ -318,7 +318,7 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_weight="1"
                                 android:text="Magisk修补"
-                                android:textColor="#000"
+                                android:textColor="#fff"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
@@ -329,7 +329,7 @@
                                 android:layout_gravity="end"
                                 android:layout_marginEnd="15dp"
                                 android:layout_marginBottom="15dp"
-                                app:srcCompat="@drawable/ic_magisk_with_bkg" />
+                                app:srcCompat="@drawable/ic_magisk" />
 
                         </LinearLayout>
 

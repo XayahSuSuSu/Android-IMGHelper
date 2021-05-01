@@ -38,8 +38,10 @@ class CommandArrayUtil {
                     os.flush()
                     Log.d("mCommand", "输入指令 : $i")
                 }
+                Log.d("mCommand", "退出前")
                 os.writeBytes("exit\n")
                 os.flush()
+                Log.d("mCommand", "退出后")
                 val processResult: Int
                 shellMessage = readOSMessage(osReader)
                 errorMessage = readOSMessage(osErrorReader)

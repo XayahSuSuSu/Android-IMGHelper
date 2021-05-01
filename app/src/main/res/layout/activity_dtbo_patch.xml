@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/dtbo_patch_appbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="#fff">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="noScroll"
+
+            app:toolbarId="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <ImageView
+                        android:id="@+id/dtbo_patch_imageView_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="40dp"
+                        android:src="@drawable/ic_back"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/dtbo_patch_imageView_copyright"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="40dp"
+                        android:src="@drawable/ic_copyright"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <TextView
+                        android:id="@+id/dtbo_patch_textView_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="DTBO修补"
+                        android:textColor="@color/black"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".Activity.DtboPatchActivity">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:enabled="true"
+                    android:hint="请选择需要修补的dtbo.img">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditText_dtboPath"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:enabled="true"
+                    android:hint="请输入需要修补的刷新率">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditText_dtboRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="90" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:text="Tips:\n此处的数值并不一定为你的屏幕真实刷新率\n\n例如:\n小米10至尊纪念版屏幕真实刷新率为120Hz,而若想修补DTBO为强制全局120Hz,则此处填90\n\n具体数值请自行测试" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/floatingActionButton_dtboPatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="30dp"
+        android:text="修补"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_patch" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

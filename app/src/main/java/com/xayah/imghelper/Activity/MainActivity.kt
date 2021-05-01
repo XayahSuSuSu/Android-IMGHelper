@@ -47,6 +47,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val main_cardview_dtboPatch: CardView = findViewById(R.id.main_cardview_dtboPatch)
+        main_cardview_dtboPatch.setOnClickListener {
+            val intent = Intent(this, DtboPatchActivity::class.java)
+            startActivity(intent)
+        }
+
         val main_cardview_imgunpack: CardView = findViewById(R.id.main_cardview_imgunpack)
         main_cardview_imgunpack.setOnClickListener {
             dialogUtil.createCommonDialog("敬请期待！", {}, {})
@@ -200,6 +206,13 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "unpack_bootimg不存在，已转存")
         } else {
             Log.d("MainActivity", "unpack_bootimg已存在")
+        }
+        if (!fileUtil.ifFileExist("Patch.sh","scripts")) {
+            fileUtil.moveFileToCertainDir("Patch.sh","scripts","Scripts")
+//            executeCommand("chmod 777 Patch.sh", toolsPath, true, true)
+            Log.d("MainActivity", "Patch.sh不存在，已转存")
+        } else {
+            Log.d("MainActivity", "Patch.sh已存在")
         }
     }
 }
