@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:background="#fff">
+        android:background="@color/white">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -130,9 +130,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Tips:\n此处的数值并不一定为你的屏幕真实刷新率\n\n例如:\n小米10至尊纪念版屏幕真实刷新率为120Hz,而若想修补DTBO为强制全局120Hz,则此处填90\n\n具体数值请自行测试"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:text="Tips:\n        此处的数值并不一定为你的屏幕真实刷新率\n例如:\n        小米10至尊纪念版屏幕真实刷新率为120Hz,而若想修补DTBO为强制全局120Hz,则此处填90\n        具体数值请自行测试"
+                    android:textColor="@color/black"
+/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

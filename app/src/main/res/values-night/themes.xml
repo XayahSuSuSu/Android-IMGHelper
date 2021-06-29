@@ -2,16 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.IMGHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#1B1B1B</item>
-        <item name="colorPrimaryVariant">#1B1B1B</item>
-        <item name="colorOnPrimary">#1B1B1B</item>
+        <item name="colorPrimary">#4EAFF5</item>
+        <item name="colorPrimaryVariant">#804EAFF5</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">#3E78AF</item>
+        <item name="colorSecondaryVariant">#803E78AF</item>
+        <item name="colorOnSecondary">#000</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#000</item>
+        <item name="android:windowLightStatusBar">false</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

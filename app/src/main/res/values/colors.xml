@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="mGrayBackground">#f7f7f7</color>
+
+    <color name="dialog_background">#fff</color>
 </resources>
