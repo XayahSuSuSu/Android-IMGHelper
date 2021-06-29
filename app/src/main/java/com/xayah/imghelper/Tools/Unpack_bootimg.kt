@@ -1,8 +1,9 @@
 package com.xayah.imghelper.Tools
 
-import com.xayah.imghelper.Utils.CommandUtil
+import android.util.Log
+import com.topjohnwu.superuser.Shell
 
-class Unpack_bootimg(var toolPath: String) {
+class Unpack_bootimg() {
     /*
     usage: unpack_bootimg [-h] --boot_img BOOT_IMG [--out OUT]
 
@@ -14,12 +15,23 @@ class Unpack_bootimg(var toolPath: String) {
     --boot_img BOOT_IMG  path to boot image
     --out OUT            path to out binaries
      */
-    fun unpack(BOOT_IMG: String, OUT: String) {
-        CommandUtil.executeCommand(
-            "./unpack_bootimg --boot_img $BOOT_IMG --out $OUT",
-            toolPath,
-            true,
-            true
-        )// unpack boot.img
+    companion object {
+        fun unpackIMG(BOOT_IMG: String, OUT: String) {
+            val unpackIMG = Shell.su("unpack_bootimg --boot_img $BOOT_IMG --out $OUT").exec().out
+            Log.d("unpackIMG", unpackIMG.toString())
+        }
+
+        fun unpackRamdisk(ramdiskPath: String) {
+            Shell.su("mv ${ramdiskPath}/ramdisk ${ramdiskPath}/ramdisk.cpio.gz").exec()
+            Shell.su("mkdir ${ramdiskPath}/ramdisk").exec()
+            Shell.su("mv ${ramdiskPath}/ramdisk.cpio.gz ${ramdiskPath}/ramdisk/ramdisk.cpio.gz")
+                .exec()
+            Shell.su("gunzip ${ramdiskPath}/ramdisk/ramdisk.cpio.gz").exec()
+            Shell.su("cd ${ramdiskPath}/ramdisk").exec()
+            Shell.su("cpio -idmv < ramdisk.cpio").exec()
+            Shell.su("rm ramdisk.cpio").exec()
+        }
+
     }
+
 }

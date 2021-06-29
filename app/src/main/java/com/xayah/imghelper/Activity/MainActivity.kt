@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_cardview_imgunpack.setOnClickListener {
-            dialogUtil.createCommonDialog("敬请期待！", {}, {})
+            val intent = Intent(this, IMGUnpackActivity::class.java)
+            startActivity(intent)
         }
 
         main_cardview_imgpack.setOnClickListener {
@@ -94,6 +95,11 @@ class MainActivity : AppCompatActivity() {
 
         fileUtil.mkDir(pathUtil.outPath(), false) // 创建输出目录
         fileUtil.mkDir("${pathUtil.outPath()}/extract", false) // 创建输出目录下的提取目录
+
+        fileUtil.mkDir("${pathUtil.outPath()}/unpack", false) // 创建输出目录下的解包目录
+        fileUtil.mkDir("${pathUtil.outPath()}/unpack/boot", false) // 创建输出目录下的解包目录
+        fileUtil.mkDir("${pathUtil.outPath()}/unpack/recovery", false) // 创建输出目录下的解包目录
+        fileUtil.mkDir("${pathUtil.outPath()}/unpack/dtbo", false) // 创建输出目录下的解包目录
         // 释放assets资源
         fileUtil.moveAssetsFileToDir("AARCH64/dtc", "dtc", pathUtil.toolsPath())
         fileUtil.moveAssetsFileToDir("AARCH64/mkdtimg", "mkdtimg", pathUtil.toolsPath())
