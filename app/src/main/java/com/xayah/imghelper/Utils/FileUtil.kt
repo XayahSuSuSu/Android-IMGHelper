@@ -78,6 +78,11 @@ class FileUtil(private val context: Context) {
         }
     }
 
+    fun cpDirAll(pathBefore: String, pathAfter: String) {
+        Shell.su("cp $pathBefore/* -R $pathAfter").exec()
+        chmod(pathAfter, true)
+    }
+
     fun checkToolsDirExist(dirName: String) {
         val file = File(context.filesDir.toString() + "/" + dirName)
         if (!file.exists()) {
@@ -123,10 +128,32 @@ class FileUtil(private val context: Context) {
             outStream.flush() // 刷新缓冲区
             inputStream.close()
             outStream.close()
-            Log.d("TAG", "moveFileToCertainDir: ")
+            Log.d("FileUtil", "moveFileToCertainDir: ")
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun checkToolsUpdate(updatePath: String): Boolean {
+        val checkModuleBody = Shell.su("cat /data/adb/modules/IMGHelperEnv/module.prop").exec().out
+        val updateModuleBody = Shell.su("cat ${updatePath}/module.prop").exec().out
+
+        val localVersion = checkModuleBody[2].split("=")[1]
+        val updateVersion = updateModuleBody[2].split("=")[1]
+        Log.d("FileUtil", localVersion)
+        Log.d("FileUtil", updateVersion)
+        if (localVersion != updateVersion)
+            return true
+        return false
+    }
+
+    fun rm(path: String) {
+        Shell.su("rm $path -R").exec()
+    }
+
+    fun unzip(filePath: String) {
+        Shell.su("unzip $filePath/Magisk.zip -d $filePath/Magisk").exec()
+        Log.d("FileUtil", "unzip $filePath -d $filePath/Magisk")
     }
 
 }
