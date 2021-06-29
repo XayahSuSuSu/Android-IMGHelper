@@ -5,16 +5,16 @@ import android.os.Environment
 
 
 class PathUtil(private val mContext: Context) {
-    fun toolsPath(): String {
-        return dataPath() + "/tools/"
+    fun magiskPath(): String {
+        return dataPath() + "/Magisk"
     }
 
     fun scriptsPath(): String {
-        return dataPath() + "/scripts/"
+        return dataPath() + "/scripts"
     }
 
     fun envPath(): String {
-        return dataPath() + "/env/"
+        return dataPath() + "/env"
     }
 
     fun dataPath(): String {

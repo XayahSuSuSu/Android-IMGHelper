@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.topjohnwu.superuser.Shell
@@ -89,7 +90,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         fileUtil.mkDir(pathUtil.dataPath(), false) // 创建data目录
-        fileUtil.mkDir(pathUtil.toolsPath(), false) // 创建工具目录
         fileUtil.mkDir(pathUtil.scriptsPath(), false) // 创建脚本目录
         fileUtil.mkDir(pathUtil.envPath(), false) // 创建环境目录
 
@@ -101,56 +101,36 @@ class MainActivity : AppCompatActivity() {
         fileUtil.mkDir("${pathUtil.outPath()}/unpack/recovery", false) // 创建输出目录下的解包目录
         fileUtil.mkDir("${pathUtil.outPath()}/unpack/dtbo", false) // 创建输出目录下的解包目录
         // 释放assets资源
-        fileUtil.moveAssetsFileToDir("AARCH64/dtc", "dtc", pathUtil.toolsPath())
-        fileUtil.moveAssetsFileToDir("AARCH64/mkdtimg", "mkdtimg", pathUtil.toolsPath())
-        fileUtil.moveAssetsFileToDir("AARCH64/mkbootimg", "mkbootimg", pathUtil.toolsPath())
-        fileUtil.moveAssetsFileToDir(
-            "AARCH64/unpack_bootimg",
-            "unpack_bootimg",
-            pathUtil.toolsPath()
-        )
-        fileUtil.moveAssetsFileToDir("Magisk/module.prop", "module.prop", pathUtil.envPath())
+        fileUtil.rm(pathUtil.magiskPath())
+        fileUtil.moveAssetsFileToDir("Magisk.zip", "Magisk.zip", pathUtil.dataPath())
+        fileUtil.unzip(pathUtil.dataPath())
         fileUtil.moveAssetsFileToDir("Scripts/Patch.sh", "Patch.sh", pathUtil.scriptsPath())
         // 检查环境是否配置
-        if (fileUtil.isFileExist("system/bin/dtc") &&
-            fileUtil.isFileExist("system/bin/mkbootimg") &&
-            fileUtil.isFileExist("system/bin/mkdtimg") &&
-            fileUtil.isFileExist("system/bin/unpack_bootimg")
-        ) {
+        if (fileUtil.isFileExist("/data/adb/modules/IMGHelperEnv/module.prop")) {
             // 环境已配置
             main_imageView_envCheck.setImageResource(R.drawable.ic_check)
             main_textView_envTitle.setText("环境已配置")
             main_cardView_env.setCardBackgroundColor(Color.parseColor("#03d568"))
+            if (fileUtil.checkToolsUpdate(pathUtil.magiskPath())) {
+                fileUtil.cpDirAll(
+                    pathUtil.magiskPath(),
+                    "/data/adb/modules/IMGHelperEnv"
+                )
+                Toast.makeText(this, "环境已更新！", Toast.LENGTH_SHORT).show()
+            }
+
         } else {
             // 环境未配置
             main_imageView_envCheck.setImageResource(R.drawable.ic_cancel)
             main_textView_envTitle.setText("环境未配置")
             main_cardView_env.setCardBackgroundColor(Color.parseColor("#e72d2c"))
             dialogUtil.createCommonDialog("环境尚未配置，是否立刻配置环境？", {
-                dialogUtil.createCustomButtonDialog("请选择配置方式:", "Magisk(推荐)", "Root", {
+                dialogUtil.createPositiveButtonDialog("请选择配置方式:", "Magisk模块") {
                     Thread {
                         fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/", true)
-                        fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/", true)
-                        fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/system/bin/", true)
-                        fileUtil.cpFiles(
-                            pathUtil.envPath() + "module.prop",
-                            "/data/adb/modules/IMGHelperEnv/", true
-                        )
-                        fileUtil.cpFiles(
-                            pathUtil.toolsPath() + "dtc",
-                            "/data/adb/modules/IMGHelperEnv/system/bin/", true
-                        )
-                        fileUtil.cpFiles(
-                            pathUtil.toolsPath() + "mkbootimg",
-                            "/data/adb/modules/IMGHelperEnv/system/bin/", true
-                        )
-                        fileUtil.cpFiles(
-                            pathUtil.toolsPath() + "mkdtimg",
-                            "/data/adb/modules/IMGHelperEnv/system/bin/", true
-                        )
-                        fileUtil.cpFiles(
-                            pathUtil.toolsPath() + "unpack_bootimg",
-                            "/data/adb/modules/IMGHelperEnv/system/bin/", true
+                        fileUtil.cpDirAll(
+                            pathUtil.magiskPath(),
+                            "/data/adb/modules/IMGHelperEnv"
                         )
                         runOnUiThread {
                             dialogUtil.createCommonDialog("安装成功！是否立刻重启生效?", {
@@ -159,17 +139,7 @@ class MainActivity : AppCompatActivity() {
                             })
                         }
                     }.start()
-                }, {
-                    Thread {
-                        fileUtil.cpFiles(pathUtil.toolsPath() + "dtc", "system/bin/", true)
-                        fileUtil.cpFiles(pathUtil.toolsPath() + "mkbootimg", "system/bin/", true)
-                        fileUtil.cpFiles(pathUtil.toolsPath() + "mkdtimg", "system/bin/", true)
-                        fileUtil.cpFiles(
-                            pathUtil.toolsPath() + "unpack_bootimg",
-                            "system/bin/", true
-                        )
-                    }.start()
-                })
+                }
             }, {})
         }
     }
