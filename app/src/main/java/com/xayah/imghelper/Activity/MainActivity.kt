@@ -89,58 +89,75 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        fileUtil.mkDir(pathUtil.dataPath(), false) // 创建data目录
-        fileUtil.mkDir(pathUtil.scriptsPath(), false) // 创建脚本目录
-        fileUtil.mkDir(pathUtil.envPath(), false) // 创建环境目录
-
-        fileUtil.mkDir(pathUtil.outPath(), false) // 创建输出目录
-        fileUtil.mkDir("${pathUtil.outPath()}/extract", false) // 创建输出目录下的提取目录
-
-        fileUtil.mkDir("${pathUtil.outPath()}/unpack", false) // 创建输出目录下的解包目录
-        fileUtil.mkDir("${pathUtil.outPath()}/unpack/boot", false) // 创建输出目录下的解包目录
-        fileUtil.mkDir("${pathUtil.outPath()}/unpack/recovery", false) // 创建输出目录下的解包目录
-        fileUtil.mkDir("${pathUtil.outPath()}/unpack/dtbo", false) // 创建输出目录下的解包目录
-        // 释放assets资源
-        fileUtil.rm(pathUtil.magiskPath())
-        fileUtil.moveAssetsFileToDir("Magisk.zip", "Magisk.zip", pathUtil.dataPath())
-        fileUtil.unzip(pathUtil.dataPath())
-        fileUtil.moveAssetsFileToDir("Scripts/Patch.sh", "Patch.sh", pathUtil.scriptsPath())
-        // 检查环境是否配置
-        if (fileUtil.isFileExist("/data/adb/modules/IMGHelperEnv/module.prop")) {
-            // 环境已配置
-            main_imageView_envCheck.setImageResource(R.drawable.ic_check)
-            main_textView_envTitle.setText("环境已配置")
-            main_cardView_env.setCardBackgroundColor(Color.parseColor("#03d568"))
-            if (fileUtil.checkToolsUpdate(pathUtil.magiskPath())) {
-                fileUtil.cpDirAll(
-                    pathUtil.magiskPath(),
-                    "/data/adb/modules/IMGHelperEnv"
-                )
-                Toast.makeText(this, "环境已更新！", Toast.LENGTH_SHORT).show()
-            }
-
+        val shell = Shell.getShell()
+        val arch = Shell.sh("uname -m").exec().out
+        if (arch[0] != "aarch64") {
+            dialogUtil.createPositiveButtonDialog(
+                "您的系统架构并非aarch64(arm64)！本程序目前暂不支持~",
+                "确定"
+            ) { finish() }
         } else {
-            // 环境未配置
-            main_imageView_envCheck.setImageResource(R.drawable.ic_cancel)
-            main_textView_envTitle.setText("环境未配置")
-            main_cardView_env.setCardBackgroundColor(Color.parseColor("#e72d2c"))
-            dialogUtil.createCommonDialog("环境尚未配置，是否立刻配置环境？", {
-                dialogUtil.createPositiveButtonDialog("请选择配置方式:", "Magisk模块") {
-                    Thread {
-                        fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/", true)
+            if (!shell.isRoot) {
+                dialogUtil.createPositiveButtonDialog(
+                    "您的设备未获取Root权限！\n" +
+                            "本程序依赖Magisk以及Root，请安装后再打开本程序。",
+                    "确定"
+                ) { finish() }
+            } else {
+                fileUtil.mkDir(pathUtil.dataPath(), false) // 创建data目录
+                fileUtil.mkDir(pathUtil.scriptsPath(), false) // 创建脚本目录
+                fileUtil.mkDir(pathUtil.envPath(), false) // 创建环境目录
+
+                fileUtil.mkDir(pathUtil.outPath(), false) // 创建输出目录
+                fileUtil.mkDir("${pathUtil.outPath()}/extract", false) // 创建输出目录下的提取目录
+
+                fileUtil.mkDir("${pathUtil.outPath()}/unpack", false) // 创建输出目录下的解包目录
+                fileUtil.mkDir("${pathUtil.outPath()}/unpack/boot", false) // 创建输出目录下的解包目录
+                fileUtil.mkDir("${pathUtil.outPath()}/unpack/recovery", false) // 创建输出目录下的解包目录
+                fileUtil.mkDir("${pathUtil.outPath()}/unpack/dtbo", false) // 创建输出目录下的解包目录
+
+                // 释放assets资源
+                fileUtil.rm(pathUtil.magiskPath())
+                fileUtil.moveAssetsFileToDir("Magisk.zip", "Magisk.zip", pathUtil.dataPath())
+                fileUtil.unzip(pathUtil.dataPath())
+                fileUtil.moveAssetsFileToDir("Scripts/Patch.sh", "Patch.sh", pathUtil.scriptsPath())
+                // 检查环境是否配置
+                if (fileUtil.isFileExist("/data/adb/modules/IMGHelperEnv/module.prop")) {
+                    // 环境已配置
+                    main_imageView_envCheck.setImageResource(R.drawable.ic_check)
+                    main_textView_envTitle.setText("环境已配置")
+                    main_cardView_env.setCardBackgroundColor(Color.parseColor("#03d568"))
+                    if (fileUtil.checkToolsUpdate(pathUtil.magiskPath())) {
                         fileUtil.cpDirAll(
                             pathUtil.magiskPath(),
                             "/data/adb/modules/IMGHelperEnv"
                         )
-                        runOnUiThread {
-                            dialogUtil.createCommonDialog("安装成功！是否立刻重启生效?", {
-                                Shell.su("reboot").exec()
-                            }, {
-                            })
+                        Toast.makeText(this, "环境已更新！", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    // 环境未配置
+                    main_imageView_envCheck.setImageResource(R.drawable.ic_cancel)
+                    main_textView_envTitle.setText("环境未配置")
+                    main_cardView_env.setCardBackgroundColor(Color.parseColor("#e72d2c"))
+                    dialogUtil.createCommonDialog("环境尚未配置，是否立刻配置环境？", {
+                        dialogUtil.createPositiveButtonDialog("请选择配置方式:", "Magisk模块") {
+                            Thread {
+                                fileUtil.mkDir("/data/adb/modules/IMGHelperEnv/", true)
+                                fileUtil.cpDirAll(
+                                    pathUtil.magiskPath(),
+                                    "/data/adb/modules/IMGHelperEnv"
+                                )
+                                runOnUiThread {
+                                    dialogUtil.createCommonDialog("安装成功！是否立刻重启生效?", {
+                                        Shell.su("reboot").exec()
+                                    }, {
+                                    })
+                                }
+                            }.start()
                         }
-                    }.start()
+                    }, {})
                 }
-            }, {})
+            }
         }
     }
 }
