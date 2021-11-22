@@ -3,6 +3,13 @@
     <attr name="text" format="string" />
     <attr name="subtext" format="string" />
 
+    <declare-styleable name="Clickable">
+        <attr name="android:focusable" />
+        <attr name="android:clickable" />
+        <attr name="android:background" />
+        <attr name="android:foreground" />
+    </declare-styleable>
+
     <declare-styleable name="LargeActionCard">
         <attr name="text" />
         <attr name="subtext" />

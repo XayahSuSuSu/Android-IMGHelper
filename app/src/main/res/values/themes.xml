@@ -1,22 +1,6 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.IMGHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#4EAFF5</item>
-        <item name="colorPrimaryVariant">#804EAFF5</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">#3E78AF</item>
-        <item name="colorSecondaryVariant">#803E78AF</item>
-        <item name="colorOnSecondary">#000</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">#fff</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <!-- Customize your theme here. -->
-    </style>
 
-    <style name="WidgetFoundation.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textStyle">bold</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">8dp</item>
     </style>
 </resources>

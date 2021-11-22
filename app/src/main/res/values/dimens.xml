@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="mStart">15dp</dimen>
-    <dimen name="mEnd">15dp</dimen>
-    <dimen name="mTopTextView">15dp</dimen>
-    <dimen name="mTextViewTextSize">18sp</dimen>
-    <dimen name="mTop">10dp</dimen>
-    <dimen name="mProgressBarDialogTop">70dp</dimen>
-    <dimen name="mProgressBarDialogBottom">40dp</dimen>
-
     <!-- Large Card -->
     <dimen name="large_action_card_radius">8dp</dimen>
     <dimen name="large_action_card_elevation">5dp</dimen>

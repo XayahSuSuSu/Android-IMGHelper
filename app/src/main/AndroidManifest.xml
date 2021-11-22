@@ -10,19 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IMGHelper">
         <activity
-            android:name=".Activity.IMGUnpackActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.DtboPatchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.IMGFlashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.IMGExtractActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

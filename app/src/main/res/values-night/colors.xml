@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FFFFFF</color>
-    <color name="white">#474747</color>
-    <color name="mGrayBackground">#212121</color>
 
-    <color name="dialog_background">#1b1b1b</color>
 </resources>
