@@ -9,11 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IMGHelper">
-        <activity android:name=".Activity.IMGUnpackActivity"></activity>
-        <activity android:name=".Activity.DtboPatchActivity" />
-        <activity android:name=".Activity.IMGFlashActivity" />
-        <activity android:name=".Activity.IMGExtractActivity" />
-        <activity android:name=".Activity.MainActivity">
+        <activity
+            android:name=".Activity.IMGUnpackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DtboPatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.IMGFlashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.IMGExtractActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
