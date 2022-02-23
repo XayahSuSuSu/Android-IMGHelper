@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_home"
+        android:title="主页" />
+    <item
+        android:id="@+id/page_backup"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_content_cut"
+        android:title="解包" />
+    <item
+        android:id="@+id/page_restore"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_unarchive"
+        android:title="打包" />
+    <item
+        android:id="@+id/page_more"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_architecture"
+        android:title="提取" />
+</menu>
