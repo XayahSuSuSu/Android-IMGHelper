@@ -4,20 +4,20 @@
         android:id="@+id/page_home"
         android:enabled="true"
         android:icon="@drawable/ic_outline_home"
-        android:title="主页" />
+        android:title="@string/home" />
     <item
         android:id="@+id/page_backup"
         android:enabled="true"
-        android:icon="@drawable/ic_round_content_cut"
-        android:title="解包" />
+        android:icon="@drawable/ic_outline_archive"
+        android:title="@string/unpack" />
     <item
         android:id="@+id/page_restore"
         android:enabled="true"
         android:icon="@drawable/ic_outline_unarchive"
-        android:title="打包" />
+        android:title="@string/pack" />
     <item
         android:id="@+id/page_more"
         android:enabled="true"
-        android:icon="@drawable/ic_round_architecture"
-        android:title="提取" />
+        android:icon="@drawable/ic_round_content_cut"
+        android:title="@string/extract" />
 </menu>

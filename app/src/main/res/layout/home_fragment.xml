@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".fragment.home.HomeFragment">
 
-</FrameLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.xayah.imghelper.fragment.home.HomeViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <com.xayah.imghelper.view.LargeActionCard
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="@color/md_theme_light_tertiaryContainer"
+                app:icon="@drawable/ic_baseline_vpn_key"
+                app:subtext="@{viewModel.isRoot ? @string/granted : @string/not_granted}"
+                app:text="@string/root_permissions" />
+
+            <com.xayah.imghelper.view.LargeActionCard
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="@color/md_theme_light_inverseOnSurface"
+                app:icon="@drawable/ic_round_architecture"
+                app:subtext="用于强制应用刷新率"
+                app:text="DTBO修补" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

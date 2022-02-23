@@ -7,20 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.xayah.imghelper.R
+import com.xayah.imghelper.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var binding: HomeFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+    ): View {
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        binding.viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
 
 }

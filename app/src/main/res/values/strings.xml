@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">IMG助手</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">IMG Helper</string>
+    <string name="root_permissions">Root permission</string>
+    <string name="granted">Granted</string>
+    <string name="not_granted">Not granted</string>
+    <string name="home">Home</string>
+    <string name="unpack">Unpack</string>
+    <string name="pack">Pack</string>
+    <string name="extract">Extract</string>
 </resources>
