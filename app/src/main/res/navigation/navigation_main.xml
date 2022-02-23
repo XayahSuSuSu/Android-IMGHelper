@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/page_home"
         android:name="com.xayah.imghelper.fragment.home.HomeFragment"
-        android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        android:label="@string/app_name"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_page_home_to_page_dtbo"
+            app:destination="@id/page_dtbo"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/page_dtbo"
+        android:name="com.xayah.imghelper.fragment.dtbo.DTBOFragment"
+        android:label="@string/dtbo_patch"
+        tools:layout="@layout/dtbo_fragment" />
 </navigation>

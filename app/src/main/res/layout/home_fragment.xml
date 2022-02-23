@@ -41,8 +41,9 @@
                 android:layout_marginVertical="10dp"
                 app:cardBackgroundColor="@color/md_theme_light_inverseOnSurface"
                 app:icon="@drawable/ic_round_architecture"
-                app:subtext="用于强制应用刷新率"
-                app:text="DTBO修补" />
+                app:subtext="@string/dtbo_patch_subtext"
+                app:text="@string/dtbo_patch"
+                android:onClick="@{viewModel.toDTBOFragment}"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

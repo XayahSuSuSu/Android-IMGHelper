@@ -6,17 +6,17 @@
         android:icon="@drawable/ic_outline_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/page_backup"
+        android:id="@+id/page_unpack"
         android:enabled="true"
         android:icon="@drawable/ic_outline_archive"
         android:title="@string/unpack" />
     <item
-        android:id="@+id/page_restore"
+        android:id="@+id/page_pack"
         android:enabled="true"
         android:icon="@drawable/ic_outline_unarchive"
         android:title="@string/pack" />
     <item
-        android:id="@+id/page_more"
+        android:id="@+id/page_extract"
         android:enabled="true"
         android:icon="@drawable/ic_round_content_cut"
         android:title="@string/extract" />

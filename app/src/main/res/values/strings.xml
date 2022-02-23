@@ -7,4 +7,11 @@
     <string name="unpack">Unpack</string>
     <string name="pack">Pack</string>
     <string name="extract">Extract</string>
+    <string name="dtbo_patch_subtext">For forcing refresh rate</string>
+    <string name="dtbo_patch">DTBO patch</string>
+    <string name="dtbo_tips">The refresh rate to be patched is not exactly the real refresh rate of your screen.\nFor example, the real refresh rate of the Xiaomi Mi 10 Ultra is 120Hz, and if you want to fix the DTBO to force the global 120Hz, fill in 90 here. Please test the specific value by yourself.</string>
+    <string name="dtbo_textfield_hint">Refresh rate</string>
+    <string name="choose_image">Choose image</string>
+    <string name="patch_only">Patch only</string>
+    <string name="patch_and_flash">Patch and flash</string>
 </resources>

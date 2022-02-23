@@ -8,4 +8,11 @@
     <string name="unpack">解包</string>
     <string name="pack">打包</string>
     <string name="extract">提取</string>
+    <string name="dtbo_patch_subtext">用于强制应用刷新率</string>
+    <string name="dtbo_patch">DTBO修补</string>
+    <string name="dtbo_tips">欲修补刷新率并不一定为你的屏幕真实刷新率。\n例如小米10至尊纪念版屏幕真实刷新率为120Hz,而若想修补DTBO为强制全局120Hz,则此处填90。具体数值请自行测试。</string>
+    <string name="dtbo_textfield_hint">欲修补刷新率</string>
+    <string name="choose_image">选择镜像</string>
+    <string name="patch_only">仅修补</string>
+    <string name="patch_and_flash">修补并刷入</string>
 </resources>
