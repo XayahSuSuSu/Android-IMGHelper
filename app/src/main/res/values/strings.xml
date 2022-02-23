@@ -14,4 +14,5 @@
     <string name="choose_image">Choose image</string>
     <string name="patch_only">Patch only</string>
     <string name="patch_and_flash">Patch and flash</string>
+    <string name="dtbo_copyright">From：\nCoolapk @神裂火织\nAuthorized</string>
 </resources>
