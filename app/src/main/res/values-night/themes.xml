@@ -1,6 +1,4 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.IMGHelper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-    </style>
+    <style name="Theme.IMGHelper" parent="Theme.IMGHelper.Dark"/>
 </resources>
