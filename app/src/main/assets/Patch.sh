@@ -4,6 +4,7 @@
 
 input_img=$1
 output_dir=$2
+info=$3
 mkdtimg dump $input_img -b dtb
 for i in `find dtb.*`; do
 dtc -I dtb -O dts -@ $i -o $i.dts
@@ -13,7 +14,6 @@ rm -rf dtb.*
 rm -rf dts
 mkdir dts
 mv dts.dtb.* dts
-info=`cat Info.txt`
 hz=`printf %x $info`
 Patch1=`grep -l -r -n "qcom,mdss-dsi-panel-framerate = <0x3c>" ./dts`
 sed -i "s/qcom,mdss-dsi-panel-framerate = <0x3c>/qcom,mdss-dsi-panel-framerate = <0x$hz>/g" $Patch1

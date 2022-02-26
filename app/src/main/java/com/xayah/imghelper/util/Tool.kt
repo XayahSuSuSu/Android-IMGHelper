@@ -1,6 +1,7 @@
 package com.xayah.imghelper.util
 
 import android.content.Context
+import com.topjohnwu.superuser.Shell
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -25,6 +26,21 @@ class Tool {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+        }
+
+        fun patchDTBO(
+            mContext: Context,
+            refreshRate: String,
+            imgPath: String,
+            outPutDir: String
+        ): Boolean {
+            return Shell.su(
+                "cd ${Path.getExternalFilesDir(mContext)}; sh ${
+                    Path.getExternalFilesDir(
+                        mContext
+                    )
+                }/Patch.sh $imgPath $outPutDir $refreshRate"
+            ).exec().isSuccess
         }
     }
 }
