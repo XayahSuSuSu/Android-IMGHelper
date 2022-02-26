@@ -1,8 +1,10 @@
 #!/system/bin/sh
-# BY Shenlhz
-# Adapted by Xayah
+# Authored: Shenlhz
+# Adjust: Xayah
 
-mkdtimg dump dtbo.img -b dtb
+input_img=$1
+output_dir=$2
+mkdtimg dump $input_img -b dtb
 for i in `find dtb.*`; do
 dtc -I dtb -O dts -@ $i -o $i.dts
 mv $i.dts dts.$i
@@ -29,3 +31,4 @@ done
 rm -rf dts.dtb.*
 mkdtimg create dtbo_new.img dtb.dts.dtb.*
 rm -rf dtb.dts.dtb.*
+mv dtbo_new.img $output_dir
