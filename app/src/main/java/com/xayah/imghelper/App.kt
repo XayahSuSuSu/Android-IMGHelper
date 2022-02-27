@@ -25,6 +25,7 @@ class App : Application() {
             shell.newJob()
                 .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
                 .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
+                .add("mount_partitions")
                 .exec()
             return true
         }

@@ -15,9 +15,11 @@
     <string name="patch_and_flash">Patch and flash</string>
     <string name="dtbo_copyright">From：\nCoolapk @神裂火织\nAuthorized</string>
     <string name="default_refresh_rate" translatable="false">90</string>
-    <string name="wait">请稍等</string>
-    <string name="tips">提示</string>
-    <string name="confirm">确认</string>
+    <string name="wait">Please wait</string>
+    <string name="tips">Tips</string>
+    <string name="confirm">Confirm</string>
     <string name="patch_dtbo_successfully">"Patch successfully!\nThe dtob_new.img is in:\n"</string>
     <string name="patch_dtbo_failed">Patch failed!</string>
+    <string name="patch_dtbo_flash_successfully">\nFlashed，please reboot!</string>
+    <string name="patch_dtbo_flash_failed">\nFlash failed，can not find dtbo partition!</string>
 </resources>

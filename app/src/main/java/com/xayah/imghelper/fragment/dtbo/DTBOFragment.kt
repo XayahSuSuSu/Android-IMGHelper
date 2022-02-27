@@ -45,46 +45,10 @@ class DTBOFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.viewModel = ViewModelProvider(this)[DTBOViewModel::class.java]
         binding.textButtonPatch.setOnClickListener {
-            fileExplorer.toExplorer(requireContext(), true) { imgPath, _ ->
-                if (imgPath != "") {
-                    dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
-                        val builder = MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(getString(R.string.wait))
-                            .setCancelable(false)
-                            .show()
-                        val mParam = LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
-                        mParam.setMargins(0, 200, 0, 100)
-                        builder.addContentView(ProgressBar(requireContext()), mParam)
-                        val params: WindowManager.LayoutParams = builder.window!!.attributes
-                        builder.window!!.attributes = params
-                        CoroutineScope(Dispatchers.IO).launch {
-                            val patch = Tool.patchDTBO(
-                                requireContext(),
-                                binding.textInputEditText.text.toString(),
-                                imgPath,
-                                outPath
-                            )
-                            withContext(Dispatchers.Main) {
-                                builder.dismiss()
-                                MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle(getString(R.string.tips))
-                                    .setMessage(
-                                        if (patch) getString(R.string.patch_dtbo_successfully) + outPath else getString(
-                                            R.string.patch_dtbo_failed
-                                        )
-                                    )
-                                    .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
-                                    .show()
-                            }
-                        }
-                    }
-                }
-            }
+            patchDTBO()
         }
         binding.filledButtonPatchFlash.setOnClickListener {
-
+            patchDTBO(true)
         }
         binding.textInputEditText.doOnTextChanged { text, _, _, _ ->
             if (text.toString() == "") {
@@ -93,6 +57,58 @@ class DTBOFragment : Fragment() {
             } else {
                 binding.textButtonPatch.isEnabled = true
                 binding.filledButtonPatchFlash.isEnabled = true
+            }
+        }
+    }
+
+    fun patchDTBO(flash: Boolean = false) {
+        fileExplorer.toExplorer(requireContext(), true) { imgPath, _ ->
+            if (imgPath != "") {
+                dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
+                    val builder = MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(getString(R.string.wait))
+                        .setCancelable(false)
+                        .show()
+                    val mParam = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                    mParam.setMargins(0, 200, 0, 100)
+                    builder.addContentView(ProgressBar(requireContext()), mParam)
+                    val params: WindowManager.LayoutParams = builder.window!!.attributes
+                    builder.window!!.attributes = params
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val patch = Tool.patchDTBO(
+                            requireContext(),
+                            binding.textInputEditText.text.toString(),
+                            imgPath,
+                            outPath
+                        )
+                        withContext(Dispatchers.Main) {
+                            builder.dismiss()
+                            if (patch) {
+                                val block = Tool.findBlock("dtbo")
+                                if (block != "") {
+                                    Tool.flashImage("$outPath/dtbo_new.img", block)
+                                }
+                                MaterialAlertDialogBuilder(requireContext())
+                                    .setTitle(getString(R.string.tips))
+                                    .setMessage(
+                                        getString(R.string.patch_dtbo_successfully) + outPath + if (block != "") getString(
+                                            R.string.patch_dtbo_flash_successfully
+                                        ) else getString(R.string.patch_dtbo_flash_failed)
+                                    )
+                                    .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
+                                    .show()
+                            } else {
+                                MaterialAlertDialogBuilder(requireContext())
+                                    .setTitle(getString(R.string.tips))
+                                    .setMessage(getString(R.string.patch_dtbo_failed))
+                                    .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
+                                    .show()
+                            }
+                        }
+                    }
+                }
             }
         }
     }

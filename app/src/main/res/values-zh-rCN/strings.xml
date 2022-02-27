@@ -20,4 +20,6 @@
     <string name="confirm">确认</string>
     <string name="patch_dtbo_successfully">"修补成功！\ndtbo_new.img位于：\n"</string>
     <string name="patch_dtbo_failed">修补失败！</string>
+    <string name="patch_dtbo_flash_successfully">\n已刷入，请重启！</string>
+    <string name="patch_dtbo_flash_failed">\n刷入失败，无法找到DTBO分区！</string>
 </resources>

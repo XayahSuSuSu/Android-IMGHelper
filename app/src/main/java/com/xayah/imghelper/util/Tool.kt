@@ -43,8 +43,13 @@ class Tool {
             ).exec().isSuccess
         }
 
-        fun findBlock(partName: String): MutableList<String> {
-            return Shell.su("echo \$(find_block $partName)").exec().out
+        fun findBlock(partName: String): String {
+            val out = Shell.su("echo \$(find_block ${partName}\$SLOT)").exec().out
+            return if (out.size == 0) "" else out[0]
+        }
+
+        fun flashImage(image: String, block: String) {
+            Shell.su("flash_image $image $block").exec()
         }
     }
 }
