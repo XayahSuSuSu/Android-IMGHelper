@@ -45,6 +45,17 @@
                 app:text="@string/dtbo_patch"
                 android:onClick="@{viewModel.toDTBOFragment}"/>
 
+            <com.xayah.imghelper.view.LargeActionCard
+                android:id="@+id/largeActionCard_extract"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="@color/md_theme_light_inverseOnSurface"
+                app:icon="@drawable/ic_round_content_cut"
+                app:subtext="@string/extract_img_subtext"
+                app:text="@string/extract_img"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

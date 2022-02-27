@@ -51,5 +51,9 @@ class Tool {
         fun flashImage(image: String, block: String) {
             Shell.su("flash_image $image $block").exec()
         }
+
+        fun extractImage(block: String, outPut: String): Boolean {
+            return Shell.su("dd if=$block of=$outPut").exec().isSuccess
+        }
     }
 }

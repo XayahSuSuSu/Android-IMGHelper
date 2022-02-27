@@ -23,4 +23,8 @@
     <string name="patch_dtbo_flash_successfully">\n已刷入，请重启！</string>
     <string name="patch_dtbo_flash_failed">\n刷入失败，无法找到DTBO分区！</string>
     <string name="about">关于</string>
+    <string name="extract_img">提取IMG</string>
+    <string name="extract_img_subtext">从本机中提取出镜像文件</string>
+    <string name="extract_successfully">提取成功！</string>
+    <string name="extract_failed">提取失败！</string>
 </resources>

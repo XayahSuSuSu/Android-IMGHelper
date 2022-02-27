@@ -23,4 +23,8 @@
     <string name="patch_dtbo_flash_successfully">\nFlashed，please reboot!</string>
     <string name="patch_dtbo_flash_failed">\nFlash failed，can not find dtbo partition!</string>
     <string name="about">About</string>
+    <string name="extract_img">Extract image</string>
+    <string name="extract_img_subtext">Extract image from phone</string>
+    <string name="extract_successfully">Extract successfully!</string>
+    <string name="extract_failed">Extract failed</string>
 </resources>
