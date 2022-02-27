@@ -42,5 +42,9 @@ class Tool {
                 }/Patch.sh $imgPath $outPutDir $refreshRate"
             ).exec().isSuccess
         }
+
+        fun findBlock(partName: String): MutableList<String> {
+            return Shell.su("echo \$(find_block $partName)").exec().out
+        }
     }
 }

@@ -24,6 +24,7 @@ class App : Application() {
         override fun onInit(context: Context, shell: Shell): Boolean {
             shell.newJob()
                 .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
+                .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
                 .exec()
             return true
         }
@@ -33,6 +34,8 @@ class App : Application() {
         super.onCreate()
         Tool.extractAssets(this, "Bin.zip")
         Tool.extractAssets(this, "Patch.sh")
+        Tool.extractAssets(this, "util_functions.sh")
+
         if (!ShellUtil.ls("${Path.getExternalFilesDir(this)}/bin"))
             ShellUtil.unzip(
                 "${Path.getExternalFilesDir(this)}/Bin.zip",
