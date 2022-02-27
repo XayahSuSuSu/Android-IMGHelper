@@ -27,4 +27,9 @@
     <string name="extract_img_subtext">从本机中提取出镜像文件</string>
     <string name="extract_successfully">提取成功！</string>
     <string name="extract_failed">提取失败！</string>
+    <string name="about_app">关于应用</string>
+    <string name="about_author">关于作者</string>
+    <string name="coolapk_1394294">酷安 @XayahSuSuSu</string>
+    <string name="app_author">App作者</string>
+    <string name="credits">感谢</string>
 </resources>

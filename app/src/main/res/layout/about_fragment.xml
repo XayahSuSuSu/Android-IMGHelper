@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -13,14 +14,53 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical"
-            android:paddingHorizontal="30dp"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp">
+            android:orientation="vertical">
 
+            <com.xayah.design.preference.Category
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/about_app" />
+
+            <com.xayah.design.preference.Clickable
+                isRound="@{true}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v)->viewModel.toAppGitHub(v)}"
+                app:icon="@mipmap/ic_launcher"
+                app:summary="https://github.com/XayahSuSuSu/Android-DataBackup"
+                app:title="@string/app_name" />
+
+            <com.xayah.design.preference.Category
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/about_author" />
+
+            <com.xayah.design.preference.Clickable
+                isRound="@{true}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v)->viewModel.toAppAuthorCoolapk(v)}"
+                app:icon="@drawable/coolapk_1394294"
+                app:summary="@string/coolapk_1394294"
+                app:title="@string/app_author" />
+
+            <com.xayah.design.preference.Category
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/credits" />
+
+            <com.xayah.design.preference.Clickable
+                isRound="@{true}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v)->viewModel.toClashGitHub(v)}"
+                app:icon="@drawable/ic_clash"
+                app:summary="https://github.com/Kr328/ClashForAndroid"
+                app:title="@string/clash_for_android" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </layout>

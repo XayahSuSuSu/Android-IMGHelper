@@ -27,4 +27,10 @@
     <string name="extract_img_subtext">Extract image from phone</string>
     <string name="extract_successfully">Extract successfully!</string>
     <string name="extract_failed">Extract failed</string>
+    <string name="about_app">About app</string>
+    <string name="about_author">About author</string>
+    <string name="coolapk_1394294">Coolapk @XayahSuSuSu</string>
+    <string name="app_author">App author</string>
+    <string name="credits">Credits</string>
+    <string name="clash_for_android" translatable="false">Clash For Android</string>
 </resources>
