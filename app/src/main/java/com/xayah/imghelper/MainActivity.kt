@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
             R.id.page_home,
             R.id.page_unpack,
             R.id.page_pack,
-            R.id.page_extract
+            R.id.page_about
         ).build()
         setSupportActionBar(binding.topAppBar)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.page_home, R.id.page_unpack, R.id.page_pack, R.id.page_extract -> {
+                R.id.page_home, R.id.page_unpack, R.id.page_pack, R.id.page_about -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
                 }
                 else -> {

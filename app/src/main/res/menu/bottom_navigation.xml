@@ -16,8 +16,8 @@
         android:icon="@drawable/ic_outline_unarchive"
         android:title="@string/pack" />
     <item
-        android:id="@+id/page_extract"
+        android:id="@+id/page_about"
         android:enabled="true"
-        android:icon="@drawable/ic_round_content_cut"
-        android:title="@string/extract" />
+        android:icon="@drawable/ic_round_apps"
+        android:title="@string/about" />
 </menu>

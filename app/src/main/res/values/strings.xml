@@ -22,4 +22,5 @@
     <string name="patch_dtbo_failed">Patch failed!</string>
     <string name="patch_dtbo_flash_successfully">\nFlashed，please reboot!</string>
     <string name="patch_dtbo_flash_failed">\nFlash failed，can not find dtbo partition!</string>
+    <string name="about">About</string>
 </resources>
