@@ -59,5 +59,9 @@ class Tool {
         fun unpackBoot(boot: String, outPut: String): Boolean {
             return Shell.su("cd $outPut; magiskboot unpack $boot").exec().isSuccess
         }
+
+        fun packBoot(boot: String, outPut: String): Boolean {
+            return Shell.su("cd $outPut; magiskboot repack $boot").exec().isSuccess
+        }
     }
 }

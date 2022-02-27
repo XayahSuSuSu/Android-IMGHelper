@@ -37,4 +37,8 @@
     <string name="unpack_failed">Unpack failed!</string>
     <string name="unpack_boot">Unpack boot</string>
     <string name="unpack_boot_subtext">Unpack boot image</string>
+    <string name="pack_boot">Pack boot</string>
+    <string name="pack_boot_subtext">Pack boot image</string>
+    <string name="pack_successfully">Pack successfully!\nPlaced: </string>
+    <string name="pack_failed">Pack failed!</string>
 </resources>
