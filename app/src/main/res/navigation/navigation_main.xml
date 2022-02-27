@@ -23,4 +23,16 @@
         android:name="com.xayah.imghelper.fragment.dtbo.DTBOFragment"
         android:label="@string/dtbo_patch"
         tools:layout="@layout/dtbo_fragment" />
+    <fragment
+        android:id="@+id/page_pack"
+        android:name="com.xayah.imghelper.fragment.pack.PackFragment"
+        android:label="@string/pack" />
+    <fragment
+        android:id="@+id/page_unpack"
+        android:name="com.xayah.imghelper.fragment.unpack.UnpackFragment"
+        android:label="@string/unpack" />
+    <fragment
+        android:id="@+id/page_about"
+        android:name="com.xayah.imghelper.fragment.about.AboutFragment"
+        android:label="@string/about" />
 </navigation>
