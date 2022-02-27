@@ -24,7 +24,7 @@
             android:paddingTop="30dp"
             android:paddingBottom="30dp">
 
-            <com.xayah.imghelper.view.LargeActionCard
+            <com.xayah.design.LargeActionCard
                 style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 app:subtext="@{viewModel.isRoot ? @string/granted : @string/not_granted}"
                 app:text="@string/root_permissions" />
 
-            <com.xayah.imghelper.view.LargeActionCard
+            <com.xayah.design.LargeActionCard
                 style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 app:text="@string/dtbo_patch"
                 android:onClick="@{viewModel.toDTBOFragment}"/>
 
-            <com.xayah.imghelper.view.LargeActionCard
+            <com.xayah.design.LargeActionCard
                 android:id="@+id/largeActionCard_extract"
                 style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"

@@ -79,4 +79,7 @@ dependencies {
 
     // MaterialYouFileExplorer
     implementation 'io.github.xayahsususu:materialyoufileexplorer:1.0.2'
+
+    // design
+    implementation project(path: ':design')
 }
