@@ -32,4 +32,8 @@
     <string name="coolapk_1394294">酷安 @XayahSuSuSu</string>
     <string name="app_author">App作者</string>
     <string name="credits">感谢</string>
+    <string name="unpack_successfully">解包成功！\n位于： </string>
+    <string name="unpack_failed">解包失败！</string>
+    <string name="unpack_boot">BOOT解包</string>
+    <string name="unpack_boot_subtext">解包内核镜像</string>
 </resources>

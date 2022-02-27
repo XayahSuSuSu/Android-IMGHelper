@@ -33,4 +33,8 @@
     <string name="app_author">App author</string>
     <string name="credits">Credits</string>
     <string name="clash_for_android" translatable="false">Clash For Android</string>
+    <string name="unpack_successfully">Unpack successfully!\nPlaced: </string>
+    <string name="unpack_failed">Unpack failed!</string>
+    <string name="unpack_boot">Unpack boot</string>
+    <string name="unpack_boot_subtext">Unpack boot image</string>
 </resources>

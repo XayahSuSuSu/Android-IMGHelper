@@ -55,5 +55,9 @@ class Tool {
         fun extractImage(block: String, outPut: String): Boolean {
             return Shell.su("dd if=$block of=$outPut").exec().isSuccess
         }
+
+        fun unpackBoot(boot: String, outPut: String): Boolean {
+            return Shell.su("cd $outPut; magiskboot unpack $boot").exec().isSuccess
+        }
     }
 }
