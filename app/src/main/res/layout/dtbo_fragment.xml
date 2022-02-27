@@ -44,8 +44,11 @@
             app:layout_constraintTop_toBottomOf="@id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@string/default_refresh_rate" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,21 +87,14 @@
             app:layout_constraintLeft_toLeftOf="parent">
 
             <Button
-                android:id="@+id/textButton_refxresh"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_image" />
-
-            <Button
-                android:id="@+id/textButton_refresh"
+                android:id="@+id/textButton_patch"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/patch_only" />
 
             <Button
-                android:id="@+id/filledButton_backup"
+                android:id="@+id/filledButton_patch_flash"
                 style="@style/Theme.IMGHelper.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

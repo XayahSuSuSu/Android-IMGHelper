@@ -11,8 +11,13 @@
     <string name="dtbo_patch">DTBO patch</string>
     <string name="dtbo_tips">The refresh rate to be patched is not exactly the real refresh rate of your screen.\nFor example, the real refresh rate of the Xiaomi Mi 10 Ultra is 120Hz, and if you want to fix the DTBO to force the global 120Hz, fill in 90 here. Please test the specific value by yourself.</string>
     <string name="dtbo_textfield_hint">Refresh rate</string>
-    <string name="choose_image">Choose image</string>
     <string name="patch_only">Patch only</string>
     <string name="patch_and_flash">Patch and flash</string>
     <string name="dtbo_copyright">From：\nCoolapk @神裂火织\nAuthorized</string>
+    <string name="default_refresh_rate" translatable="false">90</string>
+    <string name="wait">请稍等</string>
+    <string name="tips">提示</string>
+    <string name="confirm">确认</string>
+    <string name="patch_dtbo_successfully">"Patch successfully!\nThe dtob_new.img is in:\n"</string>
+    <string name="patch_dtbo_failed">Patch failed!</string>
 </resources>

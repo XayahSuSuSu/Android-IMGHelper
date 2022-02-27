@@ -78,5 +78,5 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // MaterialYouFileExplorer
-    implementation 'io.github.xayahsususu:materialyoufileexplorer:1.0.1'
+    implementation 'io.github.xayahsususu:materialyoufileexplorer:1.0.2'
 }
