@@ -25,7 +25,7 @@
             <com.xayah.design.LargeActionCard
                 android:id="@+id/largeActionCard_boot"
                 style="?attr/materialCardViewFilledStyle"
-                app:cardBackgroundColor="@color/md_theme_light_inverseOnSurface"
+                app:cardBackgroundColor="@color/md_theme_inverseOnSurface"
                 app:icon="@drawable/ic_round_content_cut"
                 app:subtext="@string/unpack_boot_subtext"
                 app:text="@string/unpack_boot"
