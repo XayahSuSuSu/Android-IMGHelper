@@ -10,13 +10,15 @@ import com.xayah.imghelper.util.Tool
 class App : Application() {
     companion object {
         init {
-            Shell.enableVerboseLogging = BuildConfig.DEBUG;
-            Shell.setDefaultBuilder(
-                Shell.Builder.create()
-                    .setFlags(Shell.FLAG_MOUNT_MASTER)
-                    .setTimeout(10)
-                    .setInitializers(ScriptInitializer::class.java)
-            )
+            if (Shell.rootAccess()){
+                Shell.enableVerboseLogging = BuildConfig.DEBUG;
+                Shell.setDefaultBuilder(
+                    Shell.Builder.create()
+                        .setFlags(Shell.FLAG_MOUNT_MASTER)
+                        .setTimeout(10)
+                        .setInitializers(ScriptInitializer::class.java)
+                )
+            }
         }
     }
 
@@ -33,14 +35,16 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Tool.extractAssets(this, "Bin.zip")
-        Tool.extractAssets(this, "Patch.sh")
-        Tool.extractAssets(this, "util_functions.sh")
 
-        if (!ShellUtil.ls("${Path.getExternalFilesDir(this)}/bin"))
-            ShellUtil.unzip(
-                "${Path.getExternalFilesDir(this)}/Bin.zip",
-                "${Path.getExternalFilesDir(this)}/bin"
-            )
+        if (Shell.rootAccess()){
+            Tool.extractAssets(this, "Bin.zip")
+            Tool.extractAssets(this, "Patch.sh")
+            Tool.extractAssets(this, "util_functions.sh")
+            if (!ShellUtil.ls("${Path.getExternalFilesDir(this)}/bin"))
+                ShellUtil.unzip(
+                    "${Path.getExternalFilesDir(this)}/Bin.zip",
+                    "${Path.getExternalFilesDir(this)}/bin"
+                )
+        }
     }
 }
