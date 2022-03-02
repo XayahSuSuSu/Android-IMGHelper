@@ -10,25 +10,24 @@ import com.xayah.imghelper.util.Tool
 class App : Application() {
     companion object {
         init {
-            if (Shell.rootAccess()){
-                Shell.enableVerboseLogging = BuildConfig.DEBUG;
-                Shell.setDefaultBuilder(
-                    Shell.Builder.create()
-                        .setFlags(Shell.FLAG_MOUNT_MASTER)
-                        .setTimeout(10)
-                        .setInitializers(ScriptInitializer::class.java)
-                )
-            }
+            Shell.enableVerboseLogging = BuildConfig.DEBUG;
+            Shell.setDefaultBuilder(
+                Shell.Builder.create()
+                    .setFlags(Shell.FLAG_MOUNT_MASTER)
+                    .setTimeout(10)
+                    .setInitializers(ScriptInitializer::class.java)
+            )
         }
     }
 
     class ScriptInitializer : Shell.Initializer() {
         override fun onInit(context: Context, shell: Shell): Boolean {
-            shell.newJob()
-                .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
-                .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
-                .add("mount_partitions")
-                .exec()
+            if (Shell.rootAccess())
+                shell.newJob()
+                    .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
+                    .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
+                    .add("mount_partitions")
+                    .exec()
             return true
         }
     }
