@@ -86,19 +86,30 @@ class DTBOFragment : Fragment() {
                         withContext(Dispatchers.Main) {
                             builder.dismiss()
                             if (patch) {
-                                val block = Tool.findBlock("dtbo")
-                                if (block != "") {
-                                    Tool.flashImage("$outPath/dtbo_new.img", block)
+                                if (flash) {
+                                    val block = Tool.findBlock("dtbo")
+                                    if (block != "") {
+                                        Tool.flashImage("$outPath/dtbo_new.img", block)
+                                    }
+                                    MaterialAlertDialogBuilder(requireContext())
+                                        .setTitle(getString(R.string.tips))
+                                        .setMessage(
+                                            getString(R.string.patch_dtbo_successfully) + outPath + if (block != "") getString(
+                                                R.string.patch_dtbo_flash_successfully
+                                            ) else getString(R.string.patch_dtbo_flash_failed)
+                                        )
+                                        .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
+                                        .show()
+                                } else {
+                                    MaterialAlertDialogBuilder(requireContext())
+                                        .setTitle(getString(R.string.tips))
+                                        .setMessage(
+                                            getString(R.string.patch_dtbo_successfully) + outPath
+                                        )
+                                        .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
+                                        .show()
                                 }
-                                MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle(getString(R.string.tips))
-                                    .setMessage(
-                                        getString(R.string.patch_dtbo_successfully) + outPath + if (block != "") getString(
-                                            R.string.patch_dtbo_flash_successfully
-                                        ) else getString(R.string.patch_dtbo_flash_failed)
-                                    )
-                                    .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
-                                    .show()
+
                             } else {
                                 MaterialAlertDialogBuilder(requireContext())
                                     .setTitle(getString(R.string.tips))
