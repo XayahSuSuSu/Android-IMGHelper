@@ -2,7 +2,8 @@
 # Magisk General Utility Functions
 ############################################
 
-#MAGISK_VERSION_STUB
+MAGISK_VER='24.2'
+MAGISK_VER_CODE=24200
 
 ###################
 # Helper Functions

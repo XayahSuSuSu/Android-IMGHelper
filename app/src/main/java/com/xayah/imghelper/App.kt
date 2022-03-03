@@ -10,7 +10,7 @@ import com.xayah.imghelper.util.Tool
 class App : Application() {
     companion object {
         init {
-            Shell.enableVerboseLogging = BuildConfig.DEBUG;
+            Shell.enableVerboseLogging = BuildConfig.DEBUG
             Shell.setDefaultBuilder(
                 Shell.Builder.create()
                     .setFlags(Shell.FLAG_MOUNT_MASTER)
@@ -22,28 +22,20 @@ class App : Application() {
 
     class ScriptInitializer : Shell.Initializer() {
         override fun onInit(context: Context, shell: Shell): Boolean {
-            if (Shell.rootAccess())
-                shell.newJob()
-                    .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
-                    .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
-                    .add("mount_partitions")
-                    .exec()
-            return true
-        }
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        if (Shell.rootAccess()){
-            Tool.extractAssets(this, "Bin.zip")
-            Tool.extractAssets(this, "Patch.sh")
-            Tool.extractAssets(this, "util_functions.sh")
-            if (!ShellUtil.ls("${Path.getExternalFilesDir(this)}/bin"))
+            Tool.extractAssets(context, "Bin.zip")
+            Tool.extractAssets(context, "Patch.sh")
+            Tool.extractAssets(context, "util_functions.sh")
+            if (!ShellUtil.ls("${Path.getExternalFilesDir(context)}/bin"))
                 ShellUtil.unzip(
-                    "${Path.getExternalFilesDir(this)}/Bin.zip",
-                    "${Path.getExternalFilesDir(this)}/bin"
+                    "${Path.getExternalFilesDir(context)}/Bin.zip",
+                    "${Path.getExternalFilesDir(context)}/bin"
                 )
+            shell.newJob()
+                .add("export PATH=${Path.getExternalFilesDir(context)}/bin:${'$'}PATH")
+                .add("source ${Path.getExternalFilesDir(context)}/util_functions.sh")
+                .add("mount_partitions")
+                .exec()
+            return true
         }
     }
 }
