@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Libsu
-    def libsuVersion = '3.1.2'
+    def libsuVersion = '4.0.0'
     // The core module is used by all other components
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
     // Optional: APIs for creating root services

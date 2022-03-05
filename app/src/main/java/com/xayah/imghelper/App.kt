@@ -13,7 +13,7 @@ class App : Application() {
             Shell.enableVerboseLogging = BuildConfig.DEBUG
             Shell.setDefaultBuilder(
                 Shell.Builder.create()
-                    .setFlags(Shell.FLAG_MOUNT_MASTER)
+                    .setFlags(Shell.FLAG_MOUNT_MASTER or Shell.FLAG_REDIRECT_STDERR)
                     .setTimeout(10)
                     .setInitializers(ScriptInitializer::class.java)
             )

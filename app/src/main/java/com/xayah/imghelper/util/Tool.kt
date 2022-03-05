@@ -34,7 +34,7 @@ class Tool {
             imgPath: String,
             outPutDir: String
         ): Boolean {
-            return Shell.su(
+            return Shell.cmd(
                 "cd ${Path.getExternalFilesDir(mContext)}; sh ${
                     Path.getExternalFilesDir(
                         mContext
@@ -44,24 +44,24 @@ class Tool {
         }
 
         fun findBlock(partName: String): String {
-            val out = Shell.su("echo \$(find_block ${partName}\$SLOT)").exec().out
+            val out = Shell.cmd("echo \$(find_block ${partName}\$SLOT)").exec().out
             return if (out.size == 0) "" else out[0]
         }
 
         fun flashImage(image: String, block: String) {
-            Shell.su("flash_image $image $block").exec()
+            Shell.cmd("flash_image $image $block").exec()
         }
 
         fun extractImage(block: String, outPut: String): Boolean {
-            return Shell.su("dd if=$block of=$outPut").exec().isSuccess
+            return Shell.cmd("dd if=$block of=$outPut").exec().isSuccess
         }
 
         fun unpackBoot(boot: String, outPut: String): Boolean {
-            return Shell.su("cd $outPut; magiskboot unpack $boot").exec().isSuccess
+            return Shell.cmd("cd $outPut; magiskboot unpack $boot").exec().isSuccess
         }
 
         fun packBoot(boot: String, outPut: String): Boolean {
-            return Shell.su("cd $outPut; magiskboot repack $boot").exec().isSuccess
+            return Shell.cmd("cd $outPut; magiskboot repack $boot").exec().isSuccess
         }
     }
 }
