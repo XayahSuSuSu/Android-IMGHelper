@@ -70,6 +70,43 @@ class HomeFragment : Fragment() {
                     .show()
             }
         }
+        binding.largeActionCardFlash.setOnClickListener {
+            dirExplorer.toExplorer(
+                requireContext(),
+                true,
+                getString(R.string.choose_image)
+            ) { filePath, _ ->
+                val items: Array<String> = arrayOf("boot", "dtbo", "recovery")
+                var choice = 0
+                val context = requireContext()
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(getString(R.string.extract_img))
+                    .setCancelable(true)
+                    .setSingleChoiceItems(
+                        items,
+                        0
+                    ) { _, which ->
+                        choice = which
+                    }
+                    .setPositiveButton(context.getString(R.string.confirm)) { _, _ ->
+                        val block = Tool.findBlock(items[choice])
+                        var isSuccess = false
+                        if (block != "") {
+                            isSuccess = Tool.flashImage(filePath, block)
+                        }
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(getString(R.string.tips))
+                            .setMessage(
+                                if (isSuccess) getString(R.string.flash_successfully) else getString(
+                                    R.string.flash_failed
+                                )
+                            )
+                            .setPositiveButton(getString(R.string.confirm)) { _, _ -> }
+                            .show()
+                    }
+                    .show()
+            }
+        }
 
     }
 

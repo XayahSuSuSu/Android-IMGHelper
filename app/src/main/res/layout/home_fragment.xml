@@ -51,7 +51,17 @@
                 android:layout_marginVertical="10dp"
                 app:icon="@drawable/ic_round_content_cut"
                 app:subtext="@string/extract_img_subtext"
-                app:text="@string/extract_img"/>
+                app:text="@string/extract_img" />
+
+            <com.xayah.design.LargeActionCard
+                android:id="@+id/largeActionCard_flash"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:icon="@drawable/ic_round_flash"
+                app:subtext="@string/flash_img_subtext"
+                app:text="@string/flash_img" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

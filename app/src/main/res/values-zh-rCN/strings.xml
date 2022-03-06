@@ -44,4 +44,9 @@
     <string name="choose_save_path">选择保存路径</string>
     <string name="choose_boot_unpack">选择待解包BOOT镜像</string>
     <string name="choose_boot_pack">选择原BOOT镜像</string>
+    <string name="flash_img">刷入镜像</string>
+    <string name="flash_img_subtext">选择一个镜像刷入</string>
+    <string name="choose_image">选择镜像</string>
+    <string name="flash_successfully">刷入成功！</string>
+    <string name="flash_failed">刷入失败！</string>
 </resources>

@@ -48,8 +48,8 @@ class Tool {
             return if (out.size == 0) "" else out[0]
         }
 
-        fun flashImage(image: String, block: String) {
-            Shell.cmd("flash_image $image $block").exec()
+        fun flashImage(image: String, block: String): Boolean {
+            return Shell.cmd("flash_image $image $block").exec().isSuccess
         }
 
         fun extractImage(block: String, outPut: String): Boolean {
