@@ -34,7 +34,11 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         binding.largeActionCardExtract.setOnClickListener {
-            dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
+            dirExplorer.toExplorer(
+                requireContext(),
+                false,
+                getString(R.string.choose_save_path)
+            ) { outPath, _ ->
                 val items: Array<String> = arrayOf("boot", "dtbo", "recovery")
                 var choice = 0
                 val context = requireContext()

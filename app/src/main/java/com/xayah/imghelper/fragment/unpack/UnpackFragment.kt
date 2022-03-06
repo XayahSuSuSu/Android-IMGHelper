@@ -46,9 +46,17 @@ class UnpackFragment : Fragment() {
     }
 
     fun unpackBOOT() {
-        fileExplorer.toExplorer(requireContext(), true) { imgPath, _ ->
+        fileExplorer.toExplorer(
+            requireContext(),
+            true,
+            getString(R.string.choose_boot_unpack)
+        ) { imgPath, _ ->
             if (imgPath != "") {
-                dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
+                dirExplorer.toExplorer(
+                    requireContext(),
+                    false,
+                    getString(R.string.choose_save_path)
+                ) { outPath, _ ->
                     CoroutineScope(Dispatchers.IO).launch {
                         val unpack = Tool.unpackBoot(imgPath, outPath)
                         withContext(Dispatchers.Main) {

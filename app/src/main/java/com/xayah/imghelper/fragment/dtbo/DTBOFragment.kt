@@ -62,9 +62,17 @@ class DTBOFragment : Fragment() {
     }
 
     fun patchDTBO(flash: Boolean = false) {
-        fileExplorer.toExplorer(requireContext(), true) { imgPath, _ ->
+        fileExplorer.toExplorer(
+            requireContext(),
+            true,
+            getString(R.string.choose_dtbo_image)
+        ) { imgPath, _ ->
             if (imgPath != "") {
-                dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
+                dirExplorer.toExplorer(
+                    requireContext(),
+                    false,
+                    getString(R.string.choose_save_path)
+                ) { outPath, _ ->
                     val builder = MaterialAlertDialogBuilder(requireContext())
                         .setTitle(getString(R.string.wait))
                         .setCancelable(false)

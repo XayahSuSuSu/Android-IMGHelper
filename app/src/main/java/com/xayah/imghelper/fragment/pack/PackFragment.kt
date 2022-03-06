@@ -46,9 +46,17 @@ class PackFragment : Fragment() {
     }
 
     fun packBOOT() {
-        fileExplorer.toExplorer(requireContext(), true) { imgPath, _ ->
+        fileExplorer.toExplorer(
+            requireContext(),
+            true,
+            getString(R.string.choose_boot_pack)
+        ) { imgPath, _ ->
             if (imgPath != "") {
-                dirExplorer.toExplorer(requireContext(), false) { outPath, _ ->
+                dirExplorer.toExplorer(
+                    requireContext(),
+                    false,
+                    getString(R.string.choose_save_path)
+                ) { outPath, _ ->
                     CoroutineScope(Dispatchers.IO).launch {
                         val pack = Tool.packBoot(imgPath, outPath)
                         withContext(Dispatchers.Main) {

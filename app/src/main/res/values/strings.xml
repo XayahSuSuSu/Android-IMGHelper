@@ -41,4 +41,8 @@
     <string name="pack_boot_subtext">Pack boot image</string>
     <string name="pack_successfully">Pack successfully!\nPlaced: </string>
     <string name="pack_failed">Pack failed!</string>
+    <string name="choose_dtbo_image">Choose DTBO image</string>
+    <string name="choose_save_path">Chose path to save</string>
+    <string name="choose_boot_unpack">Choose BOOT image</string>
+    <string name="choose_boot_pack">Choose origin BOOT image</string>
 </resources>

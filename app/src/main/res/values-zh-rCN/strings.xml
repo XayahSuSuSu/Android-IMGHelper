@@ -40,4 +40,8 @@
     <string name="pack_boot_subtext">打包内核镜像</string>
     <string name="pack_successfully">打包成功！\n位于：</string>
     <string name="pack_failed">打包失败！</string>
+    <string name="choose_dtbo_image">选择DTBO镜像</string>
+    <string name="choose_save_path">选择保存路径</string>
+    <string name="choose_boot_unpack">选择待解包BOOT镜像</string>
+    <string name="choose_boot_pack">选择原BOOT镜像</string>
 </resources>
